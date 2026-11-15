@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phiếu học tập số & Phòng thí nghiệm ảo - KHTN 9 - Bài 18: Tính chất chung của kim loại</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            lab: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            tealab: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background-color: #f4f8fb;
+      color: #0f172a;
+    }
+    .lab-grid-bg {
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.14) 1px, transparent 0);
+      background-size: 20px 20px;
+    }
+    .chem-card {
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .chem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.18);
+    }
+    .chem-card:active {
+      transform: scale(0.97);
+    }
+    .drop-zone-active {
+      border-color: #0ea5e9 !important;
+      background-color: rgba(224, 242, 254, 0.55) !important;
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.18);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Print A4 formatting */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-worksheet, #printable-worksheet * {
+        visibility: visible;
+      }
+      #printable-worksheet {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        padding: 12mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #94a3b8 !important;
+        padding: 6px 8px !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-lab-200 selection:text-lab-900">
+
+  <!-- TOP NAVIGATION BAR (TINH GỌN, KHÔNG CÓ NÚT CẤU HÌNH GV HAY LÀM MỚI PHIẾU) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs no-print">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-lab-600 to-tealab-600 text-white flex items-center justify-center shadow-sm shrink-0">
+          <i data-lucide="flask-conical" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-lab-100 text-lab-700">KHTN 9 • Bài 18</span>
+            <span id="header-group-badge" class="hidden text-[11px] font-semibold px-2 py-0.5 rounded-full bg-tealab-50 text-tealab-700 border border-tealab-500/20"></span>
+          </div>
+          <h1 class="text-sm sm:text-base font-extrabold text-slate-900 leading-tight">Tính chất chung của kim loại</h1>
+        </div>
+      </div>
+
+      <!-- STEPPER PROGRESS BAR -->
+      <nav aria-label="Tiến trình phiếu học tập" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-0.5">
+        <button id="step-btn-0" onclick="navigateToStep(0)" class="step-pill flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-lab-600 text-white shadow-xs">
+          <span class="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center text-[10px]">0</span>
+          <span>Thông tin nhóm</span>
+        </button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+        <button id="step-btn-1" onclick="navigateToStep(1)" class="step-pill flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-400 cursor-not-allowed">
+          <i data-lucide="lock" class="w-3 h-3 step-lock-icon"></i>
+          <span>NV 1: Dự đoán</span>
+        </button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+        <button id="step-btn-2" onclick="navigateToStep(2)" class="step-pill flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-400 cursor-not-allowed">
+          <i data-lucide="lock" class="w-3 h-3 step-lock-icon"></i>
+          <span>NV 2: Thí nghiệm</span>
+        </button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+        <button id="step-btn-3" onclick="navigateToStep(3)" class="step-pill flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-400 cursor-not-allowed">
+          <i data-lucide="lock" class="w-3 h-3 step-lock-icon"></i>
+          <span>NV 3: Giải thích</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- TOAST NOTIFICATION BANNER -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none no-print"></div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5">
+
+    <!-- =====================================================================
+         BƯỚC 0: THÔNG TIN NHÓM THỰC HIỆN
+         ===================================================================== -->
+    <section id="view-step-0" class="max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-lab-700 via-lab-600 to-tealab-600 px-6 py-5 text-white">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 text-xs font-semibold mb-2">
+            <i data-lucide="users" class="w-3.5 h-3.5"></i>
+            <span>Phiếu học tập số khám phá thực nghiệm</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold">Thông tin nhóm thực hiện</h2>
+          <p class="text-lab-100 text-xs sm:text-sm mt-1">Điền đầy đủ thông tin nhóm để mở khóa khu vực dự đoán và phòng thí nghiệm hóa học ảo.</p>
+        </div>
+
+        <form id="group-info-form" onsubmit="handleStartExperiment(event)" class="p-6 space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="input-group-name" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1.5">
+                Tên nhóm <span class="text-rose-500">*</span>
+              </label>
+              <input id="input-group-name" type="text" required placeholder="Ví dụ: Nhóm 1 - Lớp 9A1"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-lab-500 focus:border-lab-500" />
+            </div>
+            <div>
+              <label for="input-exec-date" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1.5">
+                Ngày thực hiện <span class="text-rose-500">*</span>
+              </label>
+              <input id="input-exec-date" type="date" required
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-lab-500 focus:border-lab-500" />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wide text-slate-700">
+                Họ và tên các thành viên trong nhóm <span class="text-rose-500">*</span>
+              </label>
+              <button type="button" onclick="addMemberRow()" class="inline-flex items-center gap-1 text-xs font-bold text-lab-600 hover:text-lab-700 px-2 py-1 rounded-lg hover:bg-lab-50">
+                <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                <span>Thêm thành viên</span>
+              </button>
+            </div>
+            <div id="members-list-container" class="space-y-2"></div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-lab-600 to-tealab-600 hover:from-lab-700 hover:to-tealab-700 text-white font-extrabold text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+              <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+              <span>BẮT ĐẦU THÍ NGHIỆM</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         NHIỆM VỤ 1: DỰ ĐOÁN HIỆN TƯỢNG (2 CÂU HỎI TỰ LUẬN, ĐẠI DIỆN TỪNG NHÓM KIM LOẠI)
+         ===================================================================== -->
+    <section id="view-step-1" class="hidden space-y-5">
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold mb-1">
+            <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+            <span>Nhiệm vụ 1 • Khảo sát nhận thức ban đầu</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Dự đoán hiện tượng thí nghiệm</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Quan sát các kim loại đại diện cho từng mức độ hoạt động hóa học trong mỗi thí nghiệm và ghi lại dự đoán của nhóm.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span id="nv1-progress-badge" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">Đã hoàn thành: 0/5</span>
+        </div>
+      </div>
+
+      <div id="nv1-cards-container" class="space-y-4"></div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <button type="button" onclick="navigateToStep(0)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 flex items-center justify-center gap-1.5">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Quay lại Thông tin nhóm</span>
+        </button>
+        <button type="button" onclick="completeNV1AndGoLab()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-lab-600 to-tealab-600 hover:from-lab-700 hover:to-tealab-700 text-white font-extrabold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2">
+          <span>Mở Phòng thí nghiệm ảo (Nhiệm vụ 2)</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         NHIỆM VỤ 2: PHÒNG THÍ NGHIỆM ẢO & QUAN SÁT VI MÔ
+         ===================================================================== -->
+    <section id="view-step-2" class="hidden space-y-4">
+      <!-- TOP EXPERIMENT GROUP SELECTOR -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-3 sm:p-4 shadow-xs">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full bg-lab-100 text-lab-800 text-xs font-bold">Nhiệm vụ 2 • Thực nghiệm & Quan sát</span>
+            <h2 class="text-sm sm:text-base font-extrabold text-slate-900">Phòng thí nghiệm Hóa học ảo</h2>
+          </div>
+          <span id="nv2-progress-badge" class="px-3 py-1 rounded-xl bg-tealab-50 text-tealab-700 border border-tealab-500/20 text-xs font-bold">Đã ghi nhận: 0/5 nhóm TN</span>
+        </div>
+
+        <div id="lab-exp-tabs" class="grid grid-cols-2 sm:grid-cols-5 gap-2"></div>
+      </div>
+
+      <!-- MAIN LAB INTERFACE: 3 COLUMNS ON DESKTOP -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+
+        <!-- CỘT 1: KỆ HÓA CHẤT & DỤNG CỤ (3 COLS) -->
+        <div class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-3.5 shadow-xs space-y-4">
+          <div>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+              <i data-lucide="beaker" class="w-3.5 h-3.5 text-lab-600"></i>
+              <span>Dụng cụ & Chất phản ứng</span>
+            </h3>
+            <div id="shelf-vessels" class="grid grid-cols-1 gap-2"></div>
+          </div>
+
+          <div class="border-t border-slate-100 pt-3">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+              <i data-lucide="gem" class="w-3.5 h-3.5 text-tealab-600"></i>
+              <span>Mẫu vật kim loại</span>
+            </h3>
+            <div id="shelf-metals" class="grid grid-cols-2 lg:grid-cols-1 gap-2"></div>
+          </div>
+
+          <div id="shelf-indicator-wrapper" class="hidden border-t border-slate-100 pt-3">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+              <i data-lucide="droplet" class="w-3.5 h-3.5 text-pink-500"></i>
+              <span>Thuốc thử nhận biết</span>
+            </h3>
+            <div id="shelf-indicators" class="grid grid-cols-1 gap-2"></div>
+          </div>
+        </div>
+
+        <!-- CỘT 2: BÀN THÍ NGHIỆM TRUNG TÂM + KÍNH HIỂN VI VI MÔ (5 COLS) -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- BÀN THÍ NGHIỆM VĨ MÔ -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+            <div class="px-4 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span id="bench-exp-title" class="text-xs sm:text-sm font-extrabold text-slate-800">Khu vực tiến hành thí nghiệm</span>
+              </div>
+              <div id="bench-status-tags" class="flex items-center gap-1.5"></div>
+            </div>
+
+            <!-- KHU VỰC KÉO THẢ & CANVAS VĨ MÔ -->
+            <div id="macro-dropzone"
+              ondragover="handleBenchDragOver(event)"
+              ondragleave="handleBenchDragLeave(event)"
+              ondrop="handleBenchDrop(event)"
+              class="relative lab-grid-bg w-full h-[330px] sm:h-[360px] flex items-center justify-center border-2 border-transparent transition-all">
+              <canvas id="macro-canvas" class="w-full h-full block"></canvas>
+            </div>
+
+            <!-- THANH ĐIỀU KHIỂN TINH GỌN: CHỈ NÚT GẠT NGANG ĐÈN CỒN (KHÔNG CHÚ THÍCH) + NÚT LÀM LẠI -->
+            <div class="px-4 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2.5">
+                <div id="shelf-lamp-svg" class="shrink-0"></div>
+                <label class="relative inline-flex items-center cursor-pointer" aria-label="Đèn cồn">
+                  <input id="alcohol-lamp-toggle" type="checkbox" onchange="toggleAlcoholLamp(this.checked)" class="sr-only peer" />
+                  <div class="w-12 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500 shadow-inner"></div>
+                </label>
+              </div>
+
+              <button type="button" onclick="resetCurrentBench()" class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs flex items-center gap-1.5 transition-all shadow-2xs">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                <span>Làm lại</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- MÀN HÌNH KÍNH HIỂN VI VI MÔ (KHÔNG PHƯƠNG TRÌNH SẴN, KHÔNG VĂN BẢN GIẢI THÍCH SẴN, RÕ NÉT ĐỨT LIÊN KẾT) -->
+          <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-sm text-white">
+            <div class="px-4 py-2.5 bg-slate-950/70 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <i data-lucide="atom" class="w-4 h-4 text-sky-400"></i>
+                <span class="text-xs font-extrabold tracking-wide text-sky-100">Mô phỏng cấp độ nguyên tử – phân tử – ion</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button type="button" id="btn-micro-play" onclick="toggleMicroPlay()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300" title="Tạm dừng / Tiếp tục">
+                  <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" id="btn-micro-speed" onclick="toggleMicroSpeed()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-mono font-bold text-amber-300">
+                  1.0x
+                </button>
+                <button type="button" onclick="replayMicroAnimation()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300" title="Xem lại từ đầu">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="relative w-full h-[250px] sm:h-[270px] bg-slate-950">
+              <canvas id="micro-canvas" class="w-full h-full block"></canvas>
+            </div>
+
+            <div class="px-4 py-2 bg-slate-950/90 border-t border-slate-800 flex items-center gap-3">
+              <span class="text-[10px] font-mono text-slate-400 shrink-0">Tiến trình</span>
+              <input id="micro-scrubber" type="range" min="0" max="100" value="0" oninput="scrubMicroAnimation(this.value)"
+                class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-sky-400" />
+            </div>
+          </div>
+        </div>
+
+        <!-- CỘT 3: GHI NHẬN KẾT QUẢ QUAN SÁT (CHỈ 2 CÂU HỎI THEO YÊU CẦU) (4 COLS) -->
+        <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-4">
+          <div class="border-b border-slate-100 pb-2.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-tealab-700">Nhật ký thực nghiệm</span>
+            <h3 id="obs-panel-title" class="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">Ghi nhận kết quả quan sát</h3>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label for="obs-field-1" class="block text-xs font-bold text-slate-800 mb-1">
+                1. Hiện tượng quan sát được bên ngoài: <span class="text-rose-500">*</span>
+              </label>
+              <textarea id="obs-field-1" rows="4" oninput="saveObservationField(1, this.value)"
+                placeholder="Mô tả màu sắc, trạng thái ban đầu và các hiện tượng xảy ra (sủi bọt khí, cháy sáng, đổi màu dung dịch, chất rắn mới bám vào...) với từng mẫu kim loại đã thử..."
+                class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-lab-500"></textarea>
+            </div>
+
+            <div>
+              <label for="obs-field-2" class="block text-xs font-bold text-slate-800 mb-1">
+                2. Các nguyên tử, phân tử hoặc ion đã biến đổi và liên kết hình thành như thế nào? <span class="text-rose-500">*</span>
+              </label>
+              <textarea id="obs-field-2" rows="4" oninput="saveObservationField(2, this.value)"
+                placeholder="Quan sát khung mô phỏng vi mô: liên kết nét đứt nào bị phá vỡ, nguyên tử/ion nào kết hợp với nhau để tạo thành liên kết mới?"
+                class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-lab-500"></textarea>
+            </div>
+          </div>
+
+          <!-- LỊCH SỬ CÁC MẪU ĐÃ THỬ TRONG NHÓM NÀY -->
+          <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/80">
+            <div class="text-[11px] font-bold text-slate-600 mb-1.5 flex items-center gap-1">
+              <i data-lucide="history" class="w-3.5 h-3.5 text-lab-600"></i>
+              <span>Các phép thử đã thực hiện ở nhóm này:</span>
+            </div>
+            <div id="group-trials-chips" class="flex flex-wrap gap-1.5 text-[11px] text-slate-500">Chưa có phép thử nào</div>
+          </div>
+
+          <div class="pt-1 flex items-center justify-between gap-2">
+            <button type="button" onclick="prevLabGroup()" class="px-3 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50">
+              ← Nhóm trước
+            </button>
+            <button type="button" id="btn-next-lab-group" onclick="nextLabGroup()" class="px-4 py-2.5 rounded-xl bg-lab-600 hover:bg-lab-700 text-white font-bold text-xs shadow-xs">
+              Nhóm TN tiếp theo →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAVIGATION FOR NV2 -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <button type="button" onclick="navigateToStep(1)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 flex items-center justify-center gap-1.5">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Quay lại Nhiệm vụ 1</span>
+        </button>
+        <button type="button" onclick="completeNV2AndGoNV3()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-lab-600 to-tealab-600 hover:from-lab-700 hover:to-tealab-700 text-white font-extrabold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2">
+          <span>Hoàn thành Quan sát & Sang Nhiệm vụ 3</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         NHIỆM VỤ 3: ĐỐI CHIẾU, GIẢI THÍCH HIỆN TƯỢNG & NỘP PHIẾU
+         ===================================================================== -->
+    <section id="view-step-3" class="hidden space-y-5">
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-1">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
+          <span>Nhiệm vụ 3 • Đối chiếu & Giải thích khoa học</span>
+        </div>
+        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Đối chiếu dự đoán – Quan sát thực nghiệm – Giải thích hiện tượng</h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Đối chiếu dự đoán ban đầu ở Nhiệm vụ 1 với kết quả quan sát ở Nhiệm vụ 2 để giải thích bản chất hóa học của từng thí nghiệm.</p>
+      </div>
+
+      <div id="nv3-cards-container" class="space-y-5"></div>
+
+      <!-- KHU VỰC NỘP PHIẾU HỌC TẬP CHO GIÁO VIÊN (QUA GMAIL CỦA HỌC SINH HOẶC XUẤT PDF) -->
+      <div class="bg-white rounded-2xl border-2 border-lab-200 p-5 sm:p-6 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+              <i data-lucide="send" class="w-5 h-5 text-lab-600"></i>
+              <span>Hoàn thành & Nộp Phiếu học tập cho Giáo viên</span>
+            </h3>
+            <p class="text-xs text-slate-600 mt-0.5">Nhập địa chỉ Gmail của Giáo viên nhận bài để mở trực tiếp Gmail của học sinh gửi bài hoặc xuất file PDF lưu trữ.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="teacher-email-input" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              Địa chỉ Gmail của Giáo viên nhận bài <span class="text-rose-500">*</span>
+            </label>
+            <input id="teacher-email-input" type="email" placeholder="Nhập Gmail giáo viên (vd: giaovien.khtn9@gmail.com)"
+              oninput="saveSubmissionTarget()"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-lab-500" />
+          </div>
+          <div>
+            <label for="teacher-gas-input" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              Liên kết thu bài tự động Google Apps Script (Nếu GV cung cấp)
+            </label>
+            <input id="teacher-gas-input" type="url" placeholder="https://script.google.com/macros/s/.../exec (Không bắt buộc)"
+              oninput="saveSubmissionTarget()"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-lab-500" />
+          </div>
+        </div>
+
+        <div id="submission-feedback-box" class="hidden rounded-xl p-4 text-xs sm:text-sm"></div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <button type="button" onclick="navigateToStep(2)" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 flex items-center gap-1.5">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Quay lại Phòng thí nghiệm</span>
+          </button>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" onclick="exportToPDF()" class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2">
+              <i data-lucide="printer" class="w-4 h-4"></i>
+              <span>Xuất Phiếu học tập (PDF)</span>
+            </button>
+            <button type="button" id="btn-submit-final" onclick="submitWorksheet()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-lab-600 to-tealab-600 hover:from-lab-700 hover:to-tealab-700 text-white font-extrabold text-xs sm:text-sm shadow-md flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              <span>NỘP PHIẾU HỌC TẬP</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- HIDDEN PRINT TEMPLATE (A4) -->
+  <div id="printable-worksheet" class="hidden print:block bg-white text-slate-900">
+    <div class="border-b-2 border-slate-800 pb-3 mb-4 flex justify-between items-start">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-600">Môn Khoa học tự nhiên 9 • Chương trình GDPT 2018</div>
+        <h1 class="text-xl font-extrabold mt-0.5">PHIẾU HỌC TẬP SỐ – BÀI 18: TÍNH CHẤT CHUNG CỦA KIM LOẠI</h1>
+      </div>
+      <div class="text-right text-xs">
+        <div><strong>Nhóm:</strong> <span id="print-group-name"></span></div>
+        <div><strong>Ngày thực hiện:</strong> <span id="print-exec-date"></span></div>
+      </div>
+    </div>
+    <div class="mb-4 text-xs">
+      <strong>Thành viên nhóm:</strong> <span id="print-members"></span>
+    </div>
+    <div id="print-table-container" class="space-y-4"></div>
+  </div>
+
+  <!-- =========================================================================
+       JAVASCRIPT LOGIC & SCIENTIFIC SIMULATION ENGINE
+       ========================================================================= -->
+  <script>
+    // =========================================================================
+    // 1. DỮ LIỆU KHOA HỌC & CẤU HÌNH 5 NHÓM THÍ NGHIỆM (CHUẨN SGK KHTN 9)
+    // =========================================================================
+    const METALS_DATA = {
+      Na: {
+        symbol: 'Na',
+        name: 'Natri (Sodium)',
+        colorHex: '#e2e8f0',
+        strokeHex: '#64748b',
+        reactivityRank: 1,
+        shortDesc: 'Kim loại kiềm hoạt động rất mạnh'
+      },
+      Mg: {
+        symbol: 'Mg',
+        name: 'Magie (Magnesium)',
+        colorHex: '#cbd5e1',
+        strokeHex: '#475569',
+        reactivityRank: 2,
+        shortDesc: 'Kim loại hoạt động mạnh'
+      },
+      Zn: {
+        symbol: 'Zn',
+        name: 'Kẽm (Zinc)',
+        colorHex: '#94a3b8',
+        strokeHex: '#334155',
+        reactivityRank: 3,
+        shortDesc: 'Kim loại hoạt động trung bình'
+      },
+      Fe: {
+        symbol: 'Fe',
+        name: 'Sắt (Iron)',
+        colorHex: '#64748b',
+        strokeHex: '#1e293b',
+        reactivityRank: 4,
+        shortDesc: 'Kim loại hoạt động trung bình'
+      },
+      Cu: {
+        symbol: 'Cu',
+        name: 'Đồng (Copper)',
+        colorHex: '#ea580c',
+        strokeHex: '#9a3412',
+        reactivityRank: 5,
+        shortDesc: 'Kim loại hoạt động yếu (sau H)'
+      }
+    };
+
+    const EXPERIMENT_GROUPS = [
+      {
+        id: 'exp1',
+        shortTitle: '1. Tác dụng với O₂',
+        title: 'Thí nghiệm 1: Kim loại tác dụng với khí Oxygen (O₂)',
+        nv1Prompt: 'Đưa lần lượt các kim loại đại diện cho các mức độ hoạt động hóa học khác nhau: Dải Magie (Mg), Đinh sắt (Fe) và Cuộn dây đồng (Cu) vào bình chứa khí Oxygen (O₂) và đun nóng/đốt cháy.',
+        nv1Metals: ['Mg', 'Fe', 'Cu'],
+        vessels: [
+          { id: 'jar_o2', name: 'Bình khí Oxygen (O₂)', formula: 'O₂', type: 'gas', bg: '#e0f2fe', liquidColor: 'rgba(186, 230, 253, 0.25)' }
+        ],
+        metals: ['Mg', 'Fe', 'Cu'],
+        defaultVessel: 'jar_o2',
+        needsIndicator: false
+      },
+      {
+        id: 'exp2',
+        shortTitle: '2. Tác dụng với Cl₂',
+        title: 'Thí nghiệm 2: Kim loại tác dụng với phi kim Chlorine (Cl₂)',
+        nv1Prompt: 'Cho các kim loại đại diện: Mẫu Natri (Na), Đinh sắt (Fe) và Cuộn dây đồng (Cu) tác dụng với khí Chlorine (Cl₂, màu vàng lục) trong bình thủy tinh.',
+        nv1Metals: ['Na', 'Fe', 'Cu'],
+        vessels: [
+          { id: 'jar_cl2', name: 'Bình khí Chlorine (Cl₂)', formula: 'Cl₂', type: 'gas', bg: '#fef9c3', liquidColor: 'rgba(250, 204, 21, 0.26)' }
+        ],
+        metals: ['Na', 'Fe', 'Cu'],
+        defaultVessel: 'jar_cl2',
+        needsIndicator: false
+      },
+      {
+        id: 'exp3',
+        shortTitle: '3. Tác dụng với H₂O',
+        title: 'Thí nghiệm 3: Kim loại tác dụng với Nước (H₂O)',
+        nv1Prompt: 'Cho lần lượt Mẫu Natri (Na), Dải Magie (Mg) và Cuộn dây đồng (Cu) vào cốc chứa nước cất (H₂O) có nhỏ vài giọt dung dịch phenolphthalein (ở nhiệt độ thường và khi đun nóng).',
+        nv1Metals: ['Na', 'Mg', 'Cu'],
+        vessels: [
+          { id: 'beaker_h2o', name: 'Cốc nước cất (H₂O)', formula: 'H₂O', type: 'liquid', bg: '#f0f9ff', liquidColor: 'rgba(186, 230, 253, 0.45)' }
+        ],
+        metals: ['Na', 'Mg', 'Cu'],
+        defaultVessel: 'beaker_h2o',
+        needsIndicator: true
+      },
+      {
+        id: 'exp4',
+        shortTitle: '4. Tác dụng với HCl',
+        title: 'Thí nghiệm 4: Kim loại tác dụng với dung dịch Acid (HCl loãng)',
+        nv1Prompt: 'Cho lần lượt Dải Magie (Mg), Hạt kẽm (Zn), Đinh sắt (Fe) và Cuộn dây đồng (Cu) vào ống nghiệm chứa dung dịch Hydrochloric acid (HCl loãng, không màu).',
+        nv1Metals: ['Mg', 'Zn', 'Fe', 'Cu'],
+        vessels: [
+          { id: 'tube_hcl', name: 'Ống nghiệm dd HCl loãng', formula: 'HCl (dd)', type: 'liquid', bg: '#f8fafc', liquidColor: 'rgba(226, 232, 240, 0.5)' }
+        ],
+        metals: ['Mg', 'Zn', 'Fe', 'Cu'],
+        defaultVessel: 'tube_hcl',
+        needsIndicator: false
+      },
+      {
+        id: 'exp5',
+        shortTitle: '5. Tác dụng với Muối',
+        title: 'Thí nghiệm 5: Kim loại tác dụng với dung dịch Muối',
+        nv1Prompt: 'Nhúng lần lượt Đinh sắt (Fe) và Cuộn dây đồng (Cu) vào các ống nghiệm chứa dung dịch muối: Copper(II) sulfate (CuSO₄, xanh lam), Silver nitrate (AgNO₃, không màu) và Iron(II) sulfate (FeSO₄, xanh lục nhạt).',
+        nv1Metals: ['Fe', 'Cu', 'Zn'],
+        vessels: [
+          { id: 'tube_cuso4', name: 'Ống nghiệm dd CuSO₄ (xanh lam)', formula: 'CuSO₄', type: 'liquid', bg: '#dbeafe', liquidColor: 'rgba(37, 99, 235, 0.42)' },
+          { id: 'tube_agno3', name: 'Ống nghiệm dd AgNO₃ (không màu)', formula: 'AgNO₃', type: 'liquid', bg: '#f8fafc', liquidColor: 'rgba(226, 232, 240, 0.45)' },
+          { id: 'tube_feso4', name: 'Ống nghiệm dd FeSO₄ (xanh lục nhạt)', formula: 'FeSO₄', type: 'liquid', bg: '#dcfce7', liquidColor: 'rgba(74, 222, 128, 0.28)' }
+        ],
+        metals: ['Fe', 'Cu', 'Zn'],
+        defaultVessel: 'tube_cuso4',
+        needsIndicator: false
+      }
+    ];
+
+    // =========================================================================
+    // 2. HÀM ĐỒ HỌA SVG MẪU VẬT KIM LOẠI ĐA DẠNG & ĐÈN CỒN CHÂN THỰC
+    // =========================================================================
+    function getMetalSVG(symbol, sizeClass = 'w-12 h-12') {
+      switch (symbol) {
+        case 'Na':
+          // Viên Natri mềm cắt vát hình khối đa diện ánh bạc sáng
+          return `<svg viewBox="0 0 64 64" class="${sizeClass}">
+            <defs>
+              <linearGradient id="naGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f8fafc"/>
+                <stop offset="55%" stop-color="#cbd5e1"/>
+                <stop offset="100%" stop-color="#64748b"/>
+              </linearGradient>
+            </defs>
+            <polygon points="16,22 36,12 50,22 46,44 26,52 14,40" fill="url(#naGrad)" stroke="#475569" stroke-width="2" stroke-linejoin="round"/>
+            <polygon points="16,22 36,12 38,30 22,36" fill="#ffffff" opacity="0.75"/>
+            <line x1="22" y1="36" x2="26" y2="52" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="38" y1="30" x2="50" y2="22" stroke="#64748b" stroke-width="1.5"/>
+          </svg>`;
+        case 'Mg':
+          // Dải ruy-băng Magie uốn lượn ánh kim
+          return `<svg viewBox="0 0 64 64" class="${sizeClass}">
+            <defs>
+              <linearGradient id="mgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#94a3b8"/>
+                <stop offset="50%" stop-color="#f1f5f9"/>
+                <stop offset="100%" stop-color="#64748b"/>
+              </linearGradient>
+            </defs>
+            <path d="M12,44 C10,30 28,28 26,18 C24,10 42,10 44,20 C46,32 28,34 32,46 C35,54 52,50 52,38"
+              fill="none" stroke="url(#mgGrad)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M12,44 C10,30 28,28 26,18 C24,10 42,10 44,20 C46,32 28,34 32,46 C35,54 52,50 52,38"
+              fill="none" stroke="#475569" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>`;
+        case 'Zn':
+          // Cụm hạt kẽm viên xù xì (zinc granules) màu xám xanh
+          return `<svg viewBox="0 0 64 64" class="${sizeClass}">
+            <path d="M16,38 C12,30 20,22 28,25 C34,27 33,38 25,42 C19,44 18,41 16,38 Z" fill="#94a3b8" stroke="#334155" stroke-width="1.8"/>
+            <path d="M32,26 C30,17 42,14 48,21 C53,27 46,35 38,33 C33,32 33,29 32,26 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.8"/>
+            <path d="M26,45 C24,38 36,34 45,39 C52,43 48,52 38,52 C30,52 27,48 26,45 Z" fill="#64748b" stroke="#1e293b" stroke-width="1.8"/>
+            <circle cx="23" cy="30" r="2.2" fill="#f8fafc" opacity="0.7"/>
+            <circle cx="40" cy="21" r="2.5" fill="#f8fafc" opacity="0.7"/>
+          </svg>`;
+        case 'Fe':
+          // Chiếc đinh sắt đầu mũ dẹt, thân trụ, mũi nhọn màu xám thép
+          return `<svg viewBox="0 0 64 64" class="${sizeClass}">
+            <defs>
+              <linearGradient id="feGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#94a3b8"/>
+                <stop offset="50%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#1e293b"/>
+              </linearGradient>
+            </defs>
+            <g transform="rotate(-38 32 32)">
+              <rect x="23" y="10" width="18" height="4.5" rx="2" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+              <polygon points="29,14.5 35,14.5 34.5,46 32,55 29.5,46" fill="url(#feGrad)" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+              <line x1="31" y1="16" x2="31" y2="45" stroke="#cbd5e1" stroke-width="1.2" opacity="0.65"/>
+            </g>
+          </svg>`;
+        case 'Cu':
+          // Cuộn dây đồng xoắn ốc nhiều vòng màu đỏ cam ánh kim
+          return `<svg viewBox="0 0 64 64" class="${sizeClass}">
+            <ellipse cx="32" cy="22" rx="16" ry="7" fill="none" stroke="#c2410c" stroke-width="4"/>
+            <ellipse cx="32" cy="29" rx="16" ry="7" fill="none" stroke="#ea580c" stroke-width="4"/>
+            <ellipse cx="32" cy="36" rx="16" ry="7" fill="none" stroke="#f97316" stroke-width="4"/>
+            <ellipse cx="32" cy="43" rx="16" ry="7" fill="none" stroke="#c2410c" stroke-width="4"/>
+            <path d="M16,22 L12,13 M48,43 L52,51" stroke="#ea580c" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>`;
+        default:
+          return '';
+      }
+    }
+
+    function getAlcoholLampSVG(isLit, sizeClass = 'w-11 h-14') {
+      return `<svg viewBox="0 0 64 80" class="${sizeClass}">
+        <defs>
+          <linearGradient id="glassLamp" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e0f2fe" stop-opacity="0.9"/>
+            <stop offset="45%" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.85"/>
+          </linearGradient>
+          <linearGradient id="alcoholLiquid" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.75"/>
+          </linearGradient>
+        </defs>
+        ${isLit ? `
+          <!-- Ngọn lửa 3 lớp chân thực -->
+          <path d="M32,4 C25,15 24,23 32,27 C40,23 39,15 32,4 Z" fill="#f97316" opacity="0.9">
+            <animate attributeName="d" dur="0.65s" repeatCount="indefinite"
+              values="M32,4 C25,15 24,23 32,27 C40,23 39,15 32,4 Z;
+                      M33,2 C24,14 25,23 32,27 C39,23 41,14 33,2 Z;
+                      M31,5 C25,15 24,23 32,27 C40,23 38,15 31,5 Z"/>
+          </path>
+          <path d="M32,9 C27,17 27,23 32,26 C37,23 37,17 32,9 Z" fill="#facc15"/>
+          <path d="M32,17 C29,21 29,24 32,26 C35,24 35,21 32,17 Z" fill="#38bdf8"/>
+        ` : ''}
+        <!-- Bấc đèn sợi bện -->
+        <rect x="30" y="25" width="4" height="9" rx="1.5" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+        <!-- Cổ kim loại giữ bấc -->
+        <rect x="24" y="32" width="16" height="6" rx="2" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+        <!-- Bầu thủy tinh liền khối -->
+        <path d="M25,38 L39,38 L52,58 C55,64 51,72 44,72 L20,72 C13,72 9,64 12,58 Z"
+          fill="url(#glassLamp)" stroke="#0284c7" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Dung dịch cồn bên trong -->
+        <path d="M17,52 L47,52 L50,59 C52,64 49,70 43,70 L21,70 C15,70 12,64 14,59 Z"
+          fill="url(#alcoholLiquid)"/>
+        <!-- Ánh phản quang thủy tinh -->
+        <path d="M22,44 L17,56" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      </svg>`;
+    }
+
+    // =========================================================================
+    // 3. QUẢN LÝ TRẠNG THÁI ỨNG DỤNG (STATE & LOCALSTORAGE)
+    // =========================================================================
+    const STORAGE_KEY = 'khtn9_bai18_vlab_state_v6';
+
+    const DEFAULT_STATE = {
+      currentStep: 0,
+      unlockedStep: 0,
+      activeLabGroupIndex: 0,
+      savedBench: {
+        vesselId: null,
+        metalSymbol: null,
+        hasPhenolphthalein: false,
+        isHeated: false,
+        isRunning: false,
+        progress: 0
+      },
+      groupInfo: {
+        groupName: '',
+        execDate: new Date().toISOString().split('T')[0],
+        members: ['', '', '']
+      },
+      submissionTarget: {
+        email: '',
+        gasUrl: ''
+      },
+      predictions: {
+        exp1: { willReact: '', phenomenon: '' },
+        exp2: { willReact: '', phenomenon: '' },
+        exp3: { willReact: '', phenomenon: '' },
+        exp4: { willReact: '', phenomenon: '' },
+        exp5: { willReact: '', phenomenon: '' }
+      },
+      observations: {
+        exp1: { external: '', microChange: '' },
+        exp2: { external: '', microChange: '' },
+        exp3: { external: '', microChange: '' },
+        exp4: { external: '', microChange: '' },
+        exp5: { external: '', microChange: '' }
+      },
+      explanations: {
+        exp1: { scientific: '' },
+        exp2: { scientific: '' },
+        exp3: { scientific: '' },
+        exp4: { scientific: '' },
+        exp5: { scientific: '' }
+      },
+      trialsLog: []
+    };
+
+    let activeLabGroupIndex = 0;
+    let benchState = {
+      vesselId: null,
+      metalSymbol: null,
+      hasPhenolphthalein: false,
+      isHeated: false,
+      reactionData: null,
+      isRunning: false,
+      progress: 0,
+      isPlaying: true,
+      speedMultiplier: 1.0
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            ...DEFAULT_STATE,
+            ...parsed,
+            savedBench: { ...DEFAULT_STATE.savedBench, ...(parsed.savedBench || {}) },
+            groupInfo: { ...DEFAULT_STATE.groupInfo, ...(parsed.groupInfo || {}) },
+            submissionTarget: { ...DEFAULT_STATE.submissionTarget, ...(parsed.submissionTarget || {}) },
+            predictions: { ...DEFAULT_STATE.predictions, ...(parsed.predictions || {}) },
+            observations: { ...DEFAULT_STATE.observations, ...(parsed.observations || {}) },
+            explanations: { ...DEFAULT_STATE.explanations, ...(parsed.explanations || {}) },
+            trialsLog: Array.isArray(parsed.trialsLog) ? parsed.trialsLog : []
+          };
+        }
+      } catch (e) {
+        console.error('Lỗi đọc localStorage:', e);
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    }
+
+    let appState = loadState();
+    activeLabGroupIndex = appState.activeLabGroupIndex || 0;
+    if (appState.savedBench) {
+      benchState.vesselId = appState.savedBench.vesselId || null;
+      benchState.metalSymbol = appState.savedBench.metalSymbol || null;
+      benchState.hasPhenolphthalein = !!appState.savedBench.hasPhenolphthalein;
+      benchState.isHeated = !!appState.savedBench.isHeated;
+      benchState.isRunning = !!appState.savedBench.isRunning;
+      benchState.progress = appState.savedBench.progress || 0;
+      if (benchState.vesselId && benchState.metalSymbol) {
+        benchState.reactionData = evaluateReaction(benchState.vesselId, benchState.metalSymbol, benchState.isHeated);
+      }
+    }
+
+    function saveState() {
+      try {
+        appState.activeLabGroupIndex = activeLabGroupIndex;
+        appState.savedBench = {
+          vesselId: benchState.vesselId,
+          metalSymbol: benchState.metalSymbol,
+          hasPhenolphthalein: benchState.hasPhenolphthalein,
+          isHeated: benchState.isHeated,
+          isRunning: benchState.isRunning,
+          progress: benchState.progress
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.error('Lỗi lưu localStorage:', e);
+      }
+    }
+
+    // =========================================================================
+    // 4. THÔNG BÁO TOAST & ĐIỀU HƯỚNG TUẦN TỰ (0 -> 1 -> 2 -> 3)
+    // =========================================================================
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const colors = {
+        info: 'bg-slate-900 text-white border-slate-700',
+        success: 'bg-emerald-700 text-white border-emerald-500',
+        warning: 'bg-amber-600 text-white border-amber-400',
+        error: 'bg-rose-700 text-white border-rose-500'
+      };
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-3 rounded-xl border shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${colors[type] || colors.info}`;
+      el.textContent = message;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(6px)';
+        setTimeout(() => el.remove(), 300);
+      }, 3600);
+    }
+
+    function updateStepperUI() {
+      for (let i = 0; i <= 3; i++) {
+        const btn = document.getElementById(`step-btn-${i}`);
+        if (!btn) continue;
+        const isUnlocked = i <= appState.unlockedStep;
+        const isCurrent = i === appState.currentStep;
+
+        btn.className = 'step-pill flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all ';
+        if (isCurrent) {
+          btn.className += 'bg-lab-600 text-white shadow-xs';
+        } else if (isUnlocked) {
+          btn.className += 'bg-lab-50 text-lab-700 hover:bg-lab-100 cursor-pointer';
+        } else {
+          btn.className += 'bg-slate-100 text-slate-400 cursor-not-allowed';
+        }
+
+        const lockIcon = btn.querySelector('.step-lock-icon');
+        if (lockIcon) {
+          lockIcon.style.display = isUnlocked ? 'none' : 'inline-block';
+        }
+      }
+
+      const badge = document.getElementById('header-group-badge');
+      if (appState.groupInfo.groupName) {
+        badge.textContent = appState.groupInfo.groupName;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function navigateToStep(stepIndex) {
+      if (stepIndex > appState.unlockedStep) {
+        const names = ['Thông tin nhóm', 'Nhiệm vụ 1 (Dự đoán)', 'Nhiệm vụ 2 (Thí nghiệm)', 'Nhiệm vụ 3 (Giải thích)'];
+        showToast(`Hãy hoàn thành bước hiện tại để mở khóa ${names[stepIndex]}!`, 'warning');
+        return;
+      }
+
+      appState.currentStep = stepIndex;
+      saveState();
+
+      for (let i = 0; i <= 3; i++) {
+        const view = document.getElementById(`view-step-${i}`);
+        if (view) {
+          view.classList.toggle('hidden', i !== stepIndex);
+        }
+      }
+
+      updateStepperUI();
+
+      if (stepIndex === 1) renderNV1();
+      if (stepIndex === 2) {
+        renderLabWorkspace();
+        setTimeout(resizeAllCanvases, 60);
+      }
+      if (stepIndex === 3) renderNV3();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // 5. BƯỚC 0: THÔNG TIN NHÓM
+    // =========================================================================
+    function initStep0() {
+      document.getElementById('input-group-name').value = appState.groupInfo.groupName || '';
+      document.getElementById('input-exec-date').value = appState.groupInfo.execDate || new Date().toISOString().split('T')[0];
+      renderMemberInputs();
+    }
+
+    function renderMemberInputs() {
+      const container = document.getElementById('members-list-container');
+      container.innerHTML = '';
+      appState.groupInfo.members.forEach((member, idx) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-2';
+        row.innerHTML = `
+          <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center shrink-0">${idx + 1}</span>
+          <input type="text" value="${escapeHtml(member)}" placeholder="Họ và tên thành viên ${idx + 1}"
+            oninput="updateMemberValue(${idx}, this.value)"
+            class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-lab-500" />
+          ${appState.groupInfo.members.length > 1 ? `
+            <button type="button" onclick="removeMemberRow(${idx})" class="p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50" title="Xóa dòng">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          ` : ''}
+        `;
+        container.appendChild(row);
+      });
+      lucide.createIcons();
+    }
+
+    function updateMemberValue(idx, val) {
+      appState.groupInfo.members[idx] = val;
+      saveState();
+    }
+
+    function addMemberRow() {
+      appState.groupInfo.members.push('');
+      saveState();
+      renderMemberInputs();
+    }
+
+    function removeMemberRow(idx) {
+      appState.groupInfo.members.splice(idx, 1);
+      saveState();
+      renderMemberInputs();
+    }
+
+    function handleStartExperiment(e) {
+      e.preventDefault();
+      const groupName = document.getElementById('input-group-name').value.trim();
+      const execDate = document.getElementById('input-exec-date').value;
+      const validMembers = appState.groupInfo.members.map(m => m.trim()).filter(Boolean);
+
+      if (!groupName) {
+        showToast('Vui lòng nhập Tên nhóm!', 'warning');
+        return;
+      }
+      if (validMembers.length === 0) {
+        showToast('Vui lòng nhập ít nhất 1 thành viên trong nhóm!', 'warning');
+        return;
+      }
+
+      appState.groupInfo.groupName = groupName;
+      appState.groupInfo.execDate = execDate;
+      if (appState.unlockedStep < 1) appState.unlockedStep = 1;
+      saveState();
+      showToast(`Chào mừng ${groupName}! Hãy hoàn thành dự đoán ở Nhiệm vụ 1.`, 'success');
+      navigateToStep(1);
+    }
+
+    // =========================================================================
+    // 6. NHIỆM VỤ 1: DỰ ĐOÁN HIỆN TƯỢNG (2 CÂU HỎI TỰ LUẬN)
+    // =========================================================================
+    function renderNV1() {
+      const container = document.getElementById('nv1-cards-container');
+      container.innerHTML = '';
+
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const pred = appState.predictions[exp.id] || { willReact: '', phenomenon: '' };
+        const isDone = pred.willReact.trim() && pred.phenomenon.trim();
+
+        const metalsBadges = exp.nv1Metals.map(sym => {
+          const m = METALS_DATA[sym];
+          return `
+            <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200">
+              ${getMetalSVG(sym, 'w-7 h-7')}
+              <div>
+                <div class="text-xs font-bold text-slate-800">${m.name}</div>
+                <div class="text-[10px] text-slate-500">${m.shortDesc}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-3.5';
+        card.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-lab-600 text-white font-extrabold text-xs flex items-center justify-center">${idx + 1}</span>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900">${exp.title}</h3>
+            </div>
+            <span id="nv1-status-${exp.id}" class="px-2.5 py-1 rounded-full text-[11px] font-bold ${isDone ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}">
+              ${isDone ? 'Đã ghi dự đoán' : 'Chưa hoàn thành'}
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${exp.nv1Prompt}</p>
+
+          <div class="flex flex-wrap gap-2">
+            ${metalsBadges}
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+            <div>
+              <label class="block text-xs font-bold text-slate-800 mb-1">
+                1. Dự đoán phản ứng có xảy ra hay không? (Nêu rõ từng kim loại) <span class="text-rose-500">*</span>
+              </label>
+              <textarea rows="3" oninput="updateNV1Field('${exp.id}', 'willReact', this.value)"
+                placeholder="Viết dự đoán của nhóm về khả năng phản ứng của từng kim loại..."
+                class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-lab-500">${escapeHtml(pred.willReact)}</textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-800 mb-1">
+                2. Nếu phản ứng xảy ra, dự đoán hiện tượng có thể quan sát được? <span class="text-rose-500">*</span>
+              </label>
+              <textarea rows="3" oninput="updateNV1Field('${exp.id}', 'phenomenon', this.value)"
+                placeholder="Viết dự đoán hiện tượng bên ngoài (màu sắc, khí thoát ra, chất rắn mới...)"
+                class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-lab-500">${escapeHtml(pred.phenomenon)}</textarea>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateNV1Progress();
+    }
+
+    function updateNV1Field(expId, field, value) {
+      appState.predictions[expId][field] = value;
+      saveState();
+
+      const p = appState.predictions[expId];
+      const isDone = p.willReact.trim() && p.phenomenon.trim();
+      const badge = document.getElementById(`nv1-status-${expId}`);
+      if (badge) {
+        badge.className = `px-2.5 py-1 rounded-full text-[11px] font-bold ${isDone ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}`;
+        badge.textContent = isDone ? 'Đã ghi dự đoán' : 'Chưa hoàn thành';
+      }
+      updateNV1Progress();
+    }
+
+    function updateNV1Progress() {
+      let count = 0;
+      EXPERIMENT_GROUPS.forEach(exp => {
+        const p = appState.predictions[exp.id];
+        if (p && p.willReact.trim() && p.phenomenon.trim()) count++;
+      });
+      document.getElementById('nv1-progress-badge').textContent = `Đã hoàn thành: ${count}/5`;
+    }
+
+    function completeNV1AndGoLab() {
+      const missing = [];
+      EXPERIMENT_GROUPS.forEach((exp, i) => {
+        const p = appState.predictions[exp.id];
+        if (!p || !p.willReact.trim() || !p.phenomenon.trim()) {
+          missing.push(`TN ${i + 1}`);
+        }
+      });
+
+      if (missing.length > 0) {
+        showToast(`Nhóm cần hoàn thành dự đoán cho: ${missing.join(', ')} trước khi vào phòng thí nghiệm!`, 'warning');
+        return;
+      }
+
+      if (appState.unlockedStep < 2) appState.unlockedStep = 2;
+      saveState();
+      showToast('Đã lưu nguyên văn dự đoán! Hãy tiến hành thí nghiệm kiểm chứng.', 'success');
+      navigateToStep(2);
+    }
+
+    // =========================================================================
+    // 7. NHIỆM VỤ 2: PHÒNG THÍ NGHIỆM ẢO & MÔ PHỎNG VĨ MÔ / VI MÔ
+    // =========================================================================
+    function renderLabWorkspace() {
+      const tabsContainer = document.getElementById('lab-exp-tabs');
+      tabsContainer.innerHTML = '';
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const obs = appState.observations[exp.id];
+        const isObsDone = obs && obs.external.trim() && obs.microChange.trim();
+        const isActive = idx === activeLabGroupIndex;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectLabGroup(idx);
+        btn.className = `px-3 py-2 rounded-xl text-xs font-bold border text-left transition-all flex items-center justify-between gap-1.5 ${
+          isActive
+            ? 'bg-lab-600 text-white border-lab-600 shadow-xs'
+            : isObsDone
+              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+              : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+        }`;
+        btn.innerHTML = `
+          <span class="truncate">${exp.shortTitle}</span>
+          ${isObsDone ? '<span class="text-[10px] shrink-0">✓</span>' : ''}
+        `;
+        tabsContainer.appendChild(btn);
+      });
+
+      const currentExp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+      document.getElementById('bench-exp-title').textContent = currentExp.title;
+      document.getElementById('obs-panel-title').textContent = `Ghi nhận kết quả: ${currentExp.shortTitle}`;
+
+      // Render Vessels Shelf
+      const vesselsShelf = document.getElementById('shelf-vessels');
+      vesselsShelf.innerHTML = '';
+      currentExp.vessels.forEach(v => {
+        const selected = benchState.vesselId === v.id;
+        const card = document.createElement('div');
+        card.draggable = true;
+        card.ondragstart = (e) => {
+          e.dataTransfer.setData('text/plain', JSON.stringify({ type: 'vessel', id: v.id }));
+        };
+        card.onclick = () => placeItemOnBench('vessel', v.id);
+        card.className = `chem-card cursor-grab active:cursor-grabbing p-2.5 rounded-xl border flex items-center gap-2.5 select-none ${
+          selected ? 'bg-lab-50 border-lab-500 ring-2 ring-lab-500/20' : 'bg-white border-slate-200 hover:border-lab-300'
+        }`;
+        card.innerHTML = `
+          <div class="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center shrink-0" style="background:${v.bg}">
+            <span class="font-mono text-xs font-extrabold text-slate-800">${v.formula}</span>
+          </div>
+          <div class="min-w-0">
+            <div class="text-xs font-bold text-slate-800 truncate">${v.name}</div>
+            <div class="text-[10px] text-slate-500">Kéo thả hoặc chạm để đặt</div>
+          </div>
+        `;
+        vesselsShelf.appendChild(card);
+      });
+
+      // Render Metals Shelf
+      const metalsShelf = document.getElementById('shelf-metals');
+      metalsShelf.innerHTML = '';
+      currentExp.metals.forEach(sym => {
+        const m = METALS_DATA[sym];
+        const selected = benchState.metalSymbol === sym;
+        const card = document.createElement('div');
+        card.draggable = true;
+        card.ondragstart = (e) => {
+          e.dataTransfer.setData('text/plain', JSON.stringify({ type: 'metal', id: sym }));
+        };
+        card.onclick = () => placeItemOnBench('metal', sym);
+        card.className = `chem-card cursor-grab active:cursor-grabbing p-2 rounded-xl border flex items-center gap-2.5 select-none ${
+          selected ? 'bg-tealab-50 border-tealab-600 ring-2 ring-tealab-600/20' : 'bg-white border-slate-200 hover:border-tealab-400'
+        }`;
+        card.innerHTML = `
+          <div class="shrink-0">${getMetalSVG(sym, 'w-10 h-10')}</div>
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold text-slate-800 truncate">${m.name}</div>
+            <div class="font-mono text-[10px] font-bold text-slate-500">Kí hiệu: ${sym}</div>
+          </div>
+        `;
+        metalsShelf.appendChild(card);
+      });
+
+      // Render Indicator Shelf (Phenolphthalein for H2O)
+      const indWrapper = document.getElementById('shelf-indicator-wrapper');
+      const indShelf = document.getElementById('shelf-indicators');
+      if (currentExp.needsIndicator) {
+        indWrapper.classList.remove('hidden');
+        indShelf.innerHTML = `
+          <div draggable="true"
+            ondragstart="event.dataTransfer.setData('text/plain', JSON.stringify({ type: 'indicator', id: 'phenolphthalein' }))"
+            onclick="placeItemOnBench('indicator', 'phenolphthalein')"
+            class="chem-card cursor-grab active:cursor-grabbing p-2.5 rounded-xl border flex items-center gap-2.5 select-none ${
+              benchState.hasPhenolphthalein ? 'bg-pink-50 border-pink-400 ring-2 ring-pink-400/20' : 'bg-white border-slate-200 hover:border-pink-300'
+            }">
+            <div class="w-9 h-9 rounded-lg bg-pink-50 border border-pink-200 flex items-center justify-center shrink-0">
+              <i data-lucide="pipette" class="w-4 h-4 text-pink-600"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-slate-800">Dung dịch Phenolphthalein</div>
+              <div class="text-[10px] text-slate-500">${benchState.hasPhenolphthalein ? 'Đã nhỏ vào cốc' : 'Kéo hoặc chạm để nhỏ'}</div>
+            </div>
+          </div>
+        `;
+      } else {
+        indWrapper.classList.add('hidden');
+      }
+
+      // Sync Alcohol Lamp UI
+      document.getElementById('alcohol-lamp-toggle').checked = benchState.isHeated;
+      document.getElementById('shelf-lamp-svg').innerHTML = getAlcoholLampSVG(benchState.isHeated, 'w-11 h-14');
+
+      // Load saved observations (2 questions)
+      const obs = appState.observations[currentExp.id];
+      document.getElementById('obs-field-1').value = obs.external || '';
+      document.getElementById('obs-field-2').value = obs.microChange || '';
+
+      // Update Next button label
+      const nextBtn = document.getElementById('btn-next-lab-group');
+      if (activeLabGroupIndex === EXPERIMENT_GROUPS.length - 1) {
+        nextBtn.textContent = 'Hoàn tất & Sang NV 3 →';
+        nextBtn.onclick = completeNV2AndGoNV3;
+      } else {
+        nextBtn.textContent = 'Nhóm TN tiếp theo →';
+        nextBtn.onclick = nextLabGroup;
+      }
+
+      updateTrialsChips();
+      updateNV2Progress();
+      updateBenchTags();
+      lucide.createIcons();
+    }
+
+    function selectLabGroup(idx) {
+      activeLabGroupIndex = idx;
+      resetCurrentBench(true);
+      saveState();
+      renderLabWorkspace();
+    }
+
+    function prevLabGroup() {
+      if (activeLabGroupIndex > 0) {
+        selectLabGroup(activeLabGroupIndex - 1);
+      }
+    }
+
+    function nextLabGroup() {
+      if (activeLabGroupIndex < EXPERIMENT_GROUPS.length - 1) {
+        selectLabGroup(activeLabGroupIndex + 1);
+      }
+    }
+
+    function handleBenchDragOver(e) {
+      e.preventDefault();
+      document.getElementById('macro-dropzone').classList.add('drop-zone-active');
+    }
+
+    function handleBenchDragLeave(e) {
+      document.getElementById('macro-dropzone').classList.remove('drop-zone-active');
+    }
+
+    function handleBenchDrop(e) {
+      e.preventDefault();
+      document.getElementById('macro-dropzone').classList.remove('drop-zone-active');
+      try {
+        const payload = JSON.parse(e.dataTransfer.getData('text/plain'));
+        if (payload && payload.type && payload.id) {
+          placeItemOnBench(payload.type, payload.id);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function placeItemOnBench(itemType, itemId) {
+      const currentExp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+      if (itemType === 'vessel') {
+        benchState.vesselId = itemId;
+        benchState.reactionData = null;
+        benchState.isRunning = false;
+        benchState.progress = 0;
+      } else if (itemType === 'metal') {
+        if (!benchState.vesselId) {
+          benchState.vesselId = currentExp.defaultVessel;
+        }
+        benchState.metalSymbol = itemId;
+      } else if (itemType === 'indicator' && itemId === 'phenolphthalein') {
+        if (!benchState.vesselId) {
+          benchState.vesselId = currentExp.defaultVessel;
+        }
+        benchState.hasPhenolphthalein = !benchState.hasPhenolphthalein;
+      }
+      saveState();
+      renderLabWorkspace();
+
+      // Tự động chạy thí nghiệm ngay khi thả kim loại vào dụng cụ hoặc nhỏ thuốc thử khi đã có kim loại
+      if (benchState.vesselId && benchState.metalSymbol) {
+        triggerAutoReaction();
+      }
+    }
+
+    function toggleAlcoholLamp(checked) {
+      benchState.isHeated = checked;
+      document.getElementById('shelf-lamp-svg').innerHTML = getAlcoholLampSVG(benchState.isHeated, 'w-11 h-14');
+      saveState();
+      if (benchState.vesselId && benchState.metalSymbol) {
+        triggerAutoReaction();
+      }
+    }
+
+    function triggerAutoReaction() {
+      if (!benchState.vesselId || !benchState.metalSymbol) return;
+
+      const rx = evaluateReaction(benchState.vesselId, benchState.metalSymbol, benchState.isHeated);
+      benchState.reactionData = rx;
+      benchState.isRunning = true;
+      benchState.progress = 0;
+      benchState.isPlaying = true;
+      updateMicroPlayIcon();
+      saveState();
+
+      // Ghi nhận phép thử vào nhật ký
+      const currentExp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+      const vesselObj = currentExp.vessels.find(v => v.id === benchState.vesselId);
+      const label = `${benchState.metalSymbol} + ${vesselObj ? vesselObj.formula : ''}${benchState.isHeated ? ' (đun nóng)' : ' (thường)'}`;
+      const exists = appState.trialsLog.some(t => t.expId === currentExp.id && t.label === label);
+      if (!exists) {
+        appState.trialsLog.push({
+          expId: currentExp.id,
+          groupTitle: currentExp.shortTitle,
+          label,
+          reacts: rx.reacts,
+          time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+        });
+        saveState();
+        updateTrialsChips();
+      }
+      updateBenchTags();
+    }
+
+    function resetCurrentBench(silent = false) {
+      benchState.vesselId = null;
+      benchState.metalSymbol = null;
+      benchState.hasPhenolphthalein = false;
+      benchState.isHeated = false;
+      benchState.reactionData = null;
+      benchState.isRunning = false;
+      benchState.progress = 0;
+      document.getElementById('micro-scrubber').value = 0;
+      saveState();
+      if (!silent) {
+        renderLabWorkspace();
+      }
+    }
+
+    function updateBenchTags() {
+      const container = document.getElementById('bench-status-tags');
+      if (!container) return;
+      const tags = [];
+      if (benchState.vesselId) {
+        const exp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+        const v = exp.vessels.find(item => item.id === benchState.vesselId);
+        if (v) tags.push(`<span class="px-2 py-0.5 rounded-md bg-sky-100 text-sky-800 font-mono text-[11px] font-bold">${v.formula}</span>`);
+      }
+      if (benchState.metalSymbol) {
+        tags.push(`<span class="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 font-mono text-[11px] font-bold">${benchState.metalSymbol}</span>`);
+      }
+      container.innerHTML = tags.join('');
+    }
+
+    function updateTrialsChips() {
+      const currentExp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+      const container = document.getElementById('group-trials-chips');
+      const list = appState.trialsLog.filter(t => t.expId === currentExp.id);
+      if (list.length === 0) {
+        container.innerHTML = '<span class="text-slate-400 italic">Chưa có phép thử nào được thực hiện</span>';
+        return;
+      }
+      container.innerHTML = list.map(item => `
+        <span class="px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-slate-700 font-mono text-[11px] font-semibold">
+          ${escapeHtml(item.label)}
+        </span>
+      `).join('');
+    }
+
+    // =========================================================================
+    // LOGIC ĐÁNH GIÁ PHẢN ỨNG HÓA HỌC CHÍNH XÁC (SGK KHTN 9)
+    // =========================================================================
+    function evaluateReaction(vesselId, metal, isHeated) {
+      // 1. Tác dụng với O2
+      if (vesselId === 'jar_o2') {
+        if (metal === 'Mg') {
+          return {
+            reacts: isHeated,
+            type: 'o2_mg',
+            flameColor: '#ffffff',
+            glowColor: 'rgba(255, 255, 255, 0.95)',
+            solidEndColor: '#f8fafc', // MgO bột trắng
+            gasConsume: true,
+            microKey: 'mg_o2'
+          };
+        }
+        if (metal === 'Fe') {
+          return {
+            reacts: isHeated,
+            type: 'o2_fe',
+            flameColor: '#fbbf24',
+            sparks: true,
+            solidEndColor: '#1e293b', // Fe3O4 nâu đen
+            gasConsume: true,
+            microKey: 'fe_o2'
+          };
+        }
+        if (metal === 'Cu') {
+          return {
+            reacts: isHeated,
+            type: 'o2_cu',
+            flameColor: '#34d399',
+            solidEndColor: '#0f172a', // CuO màu đen
+            gasConsume: true,
+            microKey: 'cu_o2'
+          };
+        }
+      }
+
+      // 2. Tác dụng với Cl2
+      if (vesselId === 'jar_cl2') {
+        if (metal === 'Na') {
+          return {
+            reacts: isHeated,
+            type: 'cl2_na',
+            flameColor: '#facc15',
+            solidEndColor: '#ffffff', // NaCl trắng
+            gasFade: true,
+            microKey: 'na_cl2'
+          };
+        }
+        if (metal === 'Fe') {
+          return {
+            reacts: isHeated,
+            type: 'cl2_fe',
+            flameColor: '#f97316',
+            brownSmoke: true, // Khói nâu đỏ FeCl3 đặc trưng
+            solidEndColor: '#7c2d12',
+            gasFade: true,
+            microKey: 'fe_cl2'
+          };
+        }
+        if (metal === 'Cu') {
+          return {
+            reacts: isHeated,
+            type: 'cl2_cu',
+            flameColor: '#10b981',
+            solidEndColor: '#78350f', // CuCl2 nâu
+            gasFade: true,
+            microKey: 'cu_cl2'
+          };
+        }
+      }
+
+      // 3. Tác dụng với H2O
+      if (vesselId === 'beaker_h2o') {
+        if (metal === 'Na') {
+          return {
+            reacts: true,
+            type: 'h2o_na',
+            skatingNa: true,
+            bubbles: 'fast',
+            solutionEndColor: 'rgba(236, 72, 153, 0.55)', // Hồng với phenolphthalein
+            microKey: 'na_h2o'
+          };
+        }
+        if (metal === 'Mg') {
+          return {
+            reacts: isHeated, // Mg phản ứng chậm ở nước thường, phản ứng rõ khi đun nóng
+            type: 'h2o_mg',
+            bubbles: 'slow',
+            solutionEndColor: 'rgba(244, 114, 182, 0.28)',
+            microKey: 'mg_h2o'
+          };
+        }
+        if (metal === 'Cu') {
+          return {
+            reacts: false,
+            type: 'none',
+            microKey: 'no_reaction_cu_h2o'
+          };
+        }
+      }
+
+      // 4. Tác dụng với dd HCl loãng
+      if (vesselId === 'tube_hcl') {
+        if (metal === 'Mg') {
+          return {
+            reacts: true,
+            type: 'hcl_mg',
+            bubbles: 'fast',
+            dissolveMetal: true,
+            solutionEndColor: 'rgba(226, 232, 240, 0.45)',
+            microKey: 'mg_hcl'
+          };
+        }
+        if (metal === 'Zn') {
+          return {
+            reacts: true,
+            type: 'hcl_zn',
+            bubbles: 'medium',
+            dissolveMetal: true,
+            solutionEndColor: 'rgba(226, 232, 240, 0.45)',
+            microKey: 'zn_hcl'
+          };
+        }
+        if (metal === 'Fe') {
+          return {
+            reacts: true,
+            type: 'hcl_fe',
+            bubbles: 'slow',
+            dissolveMetal: true,
+            solutionEndColor: 'rgba(134, 239, 172, 0.35)', // FeCl2 xanh lục nhạt
+            microKey: 'fe_hcl'
+          };
+        }
+        if (metal === 'Cu') {
+          return {
+            reacts: false,
+            type: 'none',
+            microKey: 'no_reaction_cu_hcl'
+          };
+        }
+      }
+
+      // 5. Tác dụng với dung dịch muối
+      if (vesselId === 'tube_cuso4') {
+        if (metal === 'Fe') {
+          return {
+            reacts: true,
+            type: 'salt_fe_cuso4',
+            coatingColor: '#ea580c', // Đồng đỏ cam bám lên đinh sắt
+            solutionStartColor: 'rgba(37, 99, 235, 0.45)',
+            solutionEndColor: 'rgba(134, 239, 172, 0.38)', // Nhạt dần sang xanh lục nhạt FeSO4
+            microKey: 'fe_cuso4'
+          };
+        }
+        if (metal === 'Zn') {
+          return {
+            reacts: true,
+            type: 'salt_zn_cuso4',
+            coatingColor: '#ea580c',
+            solutionStartColor: 'rgba(37, 99, 235, 0.45)',
+            solutionEndColor: 'rgba(226, 232, 240, 0.4)', // Mất màu xanh sang không màu ZnSO4
+            microKey: 'zn_cuso4'
+          };
+        }
+        if (metal === 'Cu') {
+          return { reacts: false, type: 'none', microKey: 'no_reaction_salt' };
+        }
+      }
+
+      if (vesselId === 'tube_agno3') {
+        if (metal === 'Cu') {
+          return {
+            reacts: true,
+            type: 'salt_cu_agno3',
+            coatingColor: '#e2e8f0', // Bạc trắng xám bám lên dây đồng
+            solutionStartColor: 'rgba(226, 232, 240, 0.4)',
+            solutionEndColor: 'rgba(37, 99, 235, 0.45)', // Chuyển dần sang xanh lam Cu(NO3)2
+            microKey: 'cu_agno3'
+          };
+        }
+        if (metal === 'Fe' || metal === 'Zn') {
+          return {
+            reacts: true,
+            type: 'salt_metal_agno3',
+            coatingColor: '#e2e8f0',
+            solutionStartColor: 'rgba(226, 232, 240, 0.4)',
+            solutionEndColor: metal === 'Fe' ? 'rgba(134, 239, 172, 0.35)' : 'rgba(226, 232, 240, 0.45)',
+            microKey: 'zn_agno3'
+          };
+        }
+      }
+
+      if (vesselId === 'tube_feso4') {
+        if (metal === 'Zn') {
+          return {
+            reacts: true,
+            type: 'salt_zn_feso4',
+            coatingColor: '#475569', // Sắt xám đen bám lên kẽm
+            solutionStartColor: 'rgba(74, 222, 128, 0.3)',
+            solutionEndColor: 'rgba(226, 232, 240, 0.42)',
+            microKey: 'zn_feso4'
+          };
+        }
+        if (metal === 'Cu' || metal === 'Fe') {
+          return { reacts: false, type: 'none', microKey: 'no_reaction_salt' };
+        }
+      }
+
+      return { reacts: false, type: 'none', microKey: 'no_reaction_default' };
+    }
+
+    // Observation Saving (2 Questions)
+    function saveObservationField(fieldIndex, value) {
+      const expId = EXPERIMENT_GROUPS[activeLabGroupIndex].id;
+      const map = { 1: 'external', 2: 'microChange' };
+      appState.observations[expId][map[fieldIndex]] = value;
+      saveState();
+      updateNV2Progress();
+      renderLabTabsStatusOnly();
+    }
+
+    function renderLabTabsStatusOnly() {
+      const tabs = document.getElementById('lab-exp-tabs').children;
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const obs = appState.observations[exp.id];
+        const isDone = obs && obs.external.trim() && obs.microChange.trim();
+        if (tabs[idx]) {
+          tabs[idx].innerHTML = `<span class="truncate">${exp.shortTitle}</span>${isDone ? '<span class="text-[10px] shrink-0">✓</span>' : ''}`;
+        }
+      });
+    }
+
+    function updateNV2Progress() {
+      let count = 0;
+      EXPERIMENT_GROUPS.forEach(exp => {
+        const o = appState.observations[exp.id];
+        if (o && o.external.trim() && o.microChange.trim()) count++;
+      });
+      document.getElementById('nv2-progress-badge').textContent = `Đã ghi nhận: ${count}/5 nhóm TN`;
+    }
+
+    function completeNV2AndGoNV3() {
+      const missing = [];
+      EXPERIMENT_GROUPS.forEach((exp, i) => {
+        const o = appState.observations[exp.id];
+        if (!o || !o.external.trim() || !o.microChange.trim()) {
+          missing.push(`TN ${i + 1}`);
+        }
+      });
+
+      if (missing.length > 0) {
+        showToast(`Nhóm cần hoàn thành đủ 2 câu quan sát thực nghiệm cho: ${missing.join(', ')} trước khi sang Nhiệm vụ 3!`, 'warning');
+        return;
+      }
+
+      if (appState.unlockedStep < 3) appState.unlockedStep = 3;
+      saveState();
+      showToast('Đã lưu kết quả quan sát! Hãy đối chiếu và giải thích ở Nhiệm vụ 3.', 'success');
+      navigateToStep(3);
+    }
+
+    // =========================================================================
+    // 8. CANVAS ANIMATION ENGINE (VĨ MÔ CHẬM RÃI & VI MÔ ĐÚNG LIÊN KẾT SẢN PHẨM)
+    // =========================================================================
+    let macroCanvas, macroCtx, microCanvas, microCtx;
+    let lastTimestamp = 0;
+    let animFrameId = null;
+
+    function initCanvases() {
+      macroCanvas = document.getElementById('macro-canvas');
+      macroCtx = macroCanvas.getContext('2d');
+      microCanvas = document.getElementById('micro-canvas');
+      microCtx = microCanvas.getContext('2d');
+      resizeAllCanvases();
+      window.addEventListener('resize', resizeAllCanvases);
+    }
+
+    function resizeAllCanvases() {
+      if (macroCanvas && macroCanvas.parentElement) {
+        const rect = macroCanvas.parentElement.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          macroCanvas.width = rect.width * window.devicePixelRatio;
+          macroCanvas.height = rect.height * window.devicePixelRatio;
+          macroCtx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+        }
+      }
+      if (microCanvas && microCanvas.parentElement) {
+        const rect2 = microCanvas.parentElement.getBoundingClientRect();
+        if (rect2.width > 0 && rect2.height > 0) {
+          microCanvas.width = rect2.width * window.devicePixelRatio;
+          microCanvas.height = rect2.height * window.devicePixelRatio;
+          microCtx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+        }
+      }
+    }
+
+    function toggleMicroPlay() {
+      benchState.isPlaying = !benchState.isPlaying;
+      updateMicroPlayIcon();
+    }
+
+    function updateMicroPlayIcon() {
+      const btn = document.getElementById('btn-micro-play');
+      if (!btn) return;
+      btn.innerHTML = benchState.isPlaying
+        ? '<i data-lucide="pause" class="w-3.5 h-3.5"></i>'
+        : '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
+      lucide.createIcons();
+    }
+
+    function toggleMicroSpeed() {
+      const speeds = [1.0, 0.5, 1.5];
+      const nextIdx = (speeds.indexOf(benchState.speedMultiplier) + 1) % speeds.length;
+      benchState.speedMultiplier = speeds[nextIdx];
+      document.getElementById('btn-micro-speed').textContent = `${benchState.speedMultiplier.toFixed(1)}x`;
+    }
+
+    function replayMicroAnimation() {
+      benchState.progress = 0;
+      benchState.isPlaying = true;
+      updateMicroPlayIcon();
+    }
+
+    function scrubMicroAnimation(val) {
+      benchState.progress = parseFloat(val);
+      benchState.isPlaying = false;
+      updateMicroPlayIcon();
+    }
+
+    function animationLoop(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const dt = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (appState.currentStep === 2) {
+        if (benchState.isRunning && benchState.reactionData && benchState.isPlaying) {
+          // ~14 giây cho toàn bộ quá trình để học sinh quan sát rõ từng biến đổi
+          benchState.progress = Math.min(100, benchState.progress + dt * 7.1 * benchState.speedMultiplier);
+          document.getElementById('micro-scrubber').value = Math.floor(benchState.progress);
+          if (benchState.progress >= 100) {
+            saveState();
+          }
+        }
+        drawMacroScene(timestamp / 1000);
+        drawMicroScene(timestamp / 1000);
+      }
+
+      animFrameId = requestAnimationFrame(animationLoop);
+    }
+
+    function lerpColor(rgbaA, rgbaB, t) {
+      const parse = (str) => {
+        const m = str.match(/[\d.]+/g);
+        return m ? m.map(Number) : [220, 230, 240, 0.4];
+      };
+      const a = parse(rgbaA);
+      const b = parse(rgbaB);
+      const r = Math.round(a[0] + (b[0] - a[0]) * t);
+      const g = Math.round(a[1] + (b[1] - a[1]) * t);
+      const bl = Math.round(a[2] + (b[2] - a[2]) * t);
+      const al = (a[3] + (b[3] - a[3]) * t).toFixed(2);
+      return `rgba(${r}, ${g}, ${bl}, ${al})`;
+    }
+
+    // -------------------------------------------------------------------------
+    // VẼ CẢNH THÍ NGHIỆM VĨ MÔ (DỤNG CỤ, HÓA CHẤT, HIỆN TƯỢNG RÕ RÀNG)
+    // -------------------------------------------------------------------------
+    function drawMacroScene(timeSec) {
+      if (!macroCtx || !macroCanvas) return;
+      const w = macroCanvas.width / window.devicePixelRatio;
+      const h = macroCanvas.height / window.devicePixelRatio;
+      macroCtx.clearRect(0, 0, w, h);
+
+      // Mặt bàn thí nghiệm
+      macroCtx.fillStyle = '#e2e8f0';
+      macroCtx.fillRect(0, h - 34, w, 34);
+      macroCtx.strokeStyle = '#cbd5e1';
+      macroCtx.beginPath();
+      macroCtx.moveTo(0, h - 34);
+      macroCtx.lineTo(w, h - 34);
+      macroCtx.stroke();
+
+      const currentExp = EXPERIMENT_GROUPS[activeLabGroupIndex];
+      const cx = w * 0.5;
+      const baseY = h - 34;
+
+      if (!benchState.vesselId) {
+        macroCtx.fillStyle = '#64748b';
+        macroCtx.font = '600 13px "Be Vietnam Pro", sans-serif';
+        macroCtx.textAlign = 'center';
+        macroCtx.fillText('Kéo thả dụng cụ và mẫu kim loại từ kệ bên trái vào bàn thí nghiệm', cx, h * 0.48);
+        return;
+      }
+
+      const vessel = currentExp.vessels.find(v => v.id === benchState.vesselId);
+      const p = benchState.isRunning ? benchState.progress / 100 : 0;
+      const rx = benchState.reactionData;
+
+      // Vẽ ngọn lửa đèn cồn dưới đáy bình nếu bật đèn cồn
+      if (benchState.isHeated) {
+        drawLampFlameUnderVessel(macroCtx, cx, baseY - 4, timeSec);
+      }
+
+      const vesselBottomY = benchState.isHeated ? baseY - 48 : baseY - 4;
+
+      // Vẽ dụng cụ thủy tinh (Bình khí / Cốc / Ống nghiệm)
+      if (vessel.id.startsWith('jar_')) {
+        drawGasJar(macroCtx, cx, vesselBottomY, vessel, p, rx, timeSec);
+      } else if (vessel.id === 'beaker_h2o') {
+        drawBeaker(macroCtx, cx, vesselBottomY, vessel, p, rx, timeSec);
+      } else {
+        drawTestTube(macroCtx, cx, vesselBottomY, vessel, p, rx, timeSec);
+      }
+
+      // Nhãn trạng thái phản ứng ở góc trên
+      if (benchState.isRunning && rx) {
+        macroCtx.textAlign = 'center';
+        if (!rx.reacts) {
+          macroCtx.fillStyle = '#475569';
+          macroCtx.font = '700 12px "Be Vietnam Pro", sans-serif';
+          macroCtx.fillText('Không có hiện tượng phản ứng xảy ra', cx, 24);
+        } else {
+          macroCtx.fillStyle = '#0369a1';
+          macroCtx.font = '700 12px "Be Vietnam Pro", sans-serif';
+          macroCtx.fillText(p < 0.98 ? 'Đang xảy ra phản ứng...' : 'Phản ứng hoàn tất', cx, 24);
+        }
+      }
+    }
+
+    function drawLampFlameUnderVessel(ctx, cx, baseY, timeSec) {
+      // Đế và bầu đèn cồn nhỏ đặt dưới giá đun
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillRect(cx - 42, baseY - 44, 84, 4);
+      ctx.fillRect(cx - 38, baseY - 44, 3, 44);
+      ctx.fillRect(cx + 35, baseY - 44, 3, 44);
+
+      // Bầu đèn cồn
+      ctx.fillStyle = 'rgba(186, 230, 253, 0.7)';
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(cx - 16, baseY - 22, 32, 22, 6);
+      ctx.fill();
+      ctx.stroke();
+
+      // Ngọn lửa
+      const sway = Math.sin(timeSec * 12) * 2;
+      ctx.fillStyle = '#f97316';
+      ctx.beginPath();
+      ctx.moveTo(cx, baseY - 43);
+      ctx.quadraticCurveTo(cx - 8 + sway, baseY - 31, cx, baseY - 24);
+      ctx.quadraticCurveTo(cx + 8 + sway, baseY - 31, cx, baseY - 43);
+      ctx.fill();
+
+      ctx.fillStyle = '#facc15';
+      ctx.beginPath();
+      ctx.moveTo(cx, baseY - 39);
+      ctx.quadraticCurveTo(cx - 4 + sway * 0.5, baseY - 31, cx, baseY - 25);
+      ctx.quadraticCurveTo(cx + 4 + sway * 0.5, baseY - 31, cx, baseY - 39);
+      ctx.fill();
+    }
+
+    function drawGasJar(ctx, cx, bottomY, vessel, p, rx, timeSec) {
+      const jarW = 116;
+      const jarH = 185;
+      const topY = bottomY - jarH;
+
+      // Khí bên trong bình
+      let gasAlpha = vessel.id === 'jar_cl2' ? 0.34 : 0.16;
+      if (rx && rx.reacts && rx.gasFade) {
+        gasAlpha = Math.max(0.03, 0.34 * (1 - p));
+      }
+      ctx.fillStyle = vessel.id === 'jar_cl2'
+        ? `rgba(234, 179, 8, ${gasAlpha})`
+        : `rgba(56, 189, 248, ${gasAlpha})`;
+      ctx.beginPath();
+      ctx.roundRect(cx - jarW / 2 + 3, topY + 14, jarW - 6, jarH - 17, 10);
+      ctx.fill();
+
+      // Khói nâu đỏ FeCl3 CHỈ xuất hiện khi đốt Fe trong Cl2
+      if (rx && rx.reacts && rx.brownSmoke && p > 0.08) {
+        const smokeAlpha = Math.min(0.65, p * 0.75);
+        ctx.fillStyle = `rgba(154, 52, 18, ${smokeAlpha})`;
+        ctx.beginPath();
+        ctx.roundRect(cx - jarW / 2 + 4, topY + 16, jarW - 8, jarH - 20, 10);
+        ctx.fill();
+      }
+
+      // Thân bình thủy tinh
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.roundRect(cx - jarW / 2, topY + 12, jarW, jarH - 12, 12);
+      ctx.stroke();
+
+      // Nút bình
+      ctx.fillStyle = '#cbd5e1';
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.roundRect(cx - 28, topY, 56, 14, 4);
+      ctx.fill();
+      ctx.stroke();
+
+      // Nhãn bình khí
+      ctx.fillStyle = '#334155';
+      ctx.font = '700 12px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(vessel.formula, cx, bottomY - 12);
+
+      // Muôi sắt đưa kim loại vào bình
+      if (benchState.metalSymbol) {
+        ctx.strokeStyle = '#475569';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, topY + 14);
+        ctx.lineTo(cx, topY + 108);
+        ctx.stroke();
+
+        const sampleY = topY + 112;
+        drawMetalSampleInVessel(ctx, cx, sampleY, benchState.metalSymbol, p, rx, timeSec);
+
+        // Hiệu ứng cháy sáng / tia lửa
+        if (rx && rx.reacts && p > 0.05 && p < 0.92) {
+          if (rx.glowColor) {
+            const rad = 28 + Math.sin(timeSec * 20) * 6;
+            const grd = ctx.createRadialGradient(cx, sampleY, 2, cx, sampleY, rad);
+            grd.addColorStop(0, '#ffffff');
+            grd.addColorStop(0.5, rx.flameColor || '#fef08a');
+            grd.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = grd;
+            ctx.beginPath();
+            ctx.arc(cx, sampleY, rad, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (rx.flameColor) {
+            ctx.fillStyle = rx.flameColor;
+            ctx.beginPath();
+            ctx.arc(cx, sampleY - 4, 13 + Math.sin(timeSec * 18) * 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (rx.sparks) {
+            for (let i = 0; i < 12; i++) {
+              const ang = (i / 12) * Math.PI * 2 + timeSec * 4;
+              const dist = 12 + ((timeSec * 45 + i * 9) % 34);
+              ctx.fillStyle = i % 2 === 0 ? '#fde047' : '#fb923c';
+              ctx.beginPath();
+              ctx.arc(cx + Math.cos(ang) * dist, sampleY + Math.sin(ang) * dist, 2.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+      }
+    }
+
+    function drawBeaker(ctx, cx, bottomY, vessel, p, rx, timeSec) {
+      const bw = 136;
+      const bh = 165;
+      const topY = bottomY - bh;
+      const liqTop = topY + 52;
+
+      // Màu dung dịch
+      let liqColor = vessel.liquidColor;
+      if (benchState.hasPhenolphthalein && rx && rx.reacts && rx.solutionEndColor) {
+        liqColor = lerpColor(vessel.liquidColor, rx.solutionEndColor, Math.min(1, p * 1.4));
+      }
+
+      ctx.fillStyle = liqColor;
+      ctx.beginPath();
+      ctx.roundRect(cx - bw / 2 + 3, liqTop, bw - 6, bottomY - liqTop - 3, [0, 0, 10, 10]);
+      ctx.fill();
+
+      // Thân cốc thủy tinh
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(cx - bw / 2 - 4, topY);
+      ctx.lineTo(cx - bw / 2, bottomY - 10);
+      ctx.quadraticCurveTo(cx - bw / 2, bottomY, cx - bw / 2 + 10, bottomY);
+      ctx.lineTo(cx + bw / 2 - 10, bottomY);
+      ctx.quadraticCurveTo(cx + bw / 2, bottomY, cx + bw / 2, bottomY - 10);
+      ctx.lineTo(cx + bw / 2 + 4, topY);
+      ctx.stroke();
+
+      // Mẫu kim loại
+      if (benchState.metalSymbol) {
+        if (benchState.metalSymbol === 'Na' && rx && rx.reacts) {
+          // Viên Na nổi trên mặt nước và chạy qua lại quanh bề mặt nước
+          const skateX = cx + Math.sin(timeSec * 4.5) * (bw * 0.32) * (1 - p * 0.3);
+          const scale = Math.max(0.15, 1 - p * 0.85);
+          ctx.save();
+          ctx.translate(skateX, liqTop);
+          ctx.scale(scale, scale);
+          drawMetalSampleInVessel(ctx, 0, 0, 'Na', p, rx, timeSec);
+          ctx.restore();
+
+          // Bọt khí H2 thoát ra quanh viên Na
+          if (p < 0.96) {
+            for (let i = 0; i < 10; i++) {
+              const bx = skateX + Math.sin(timeSec * 9 + i) * 14;
+              const by = liqTop - ((timeSec * 35 + i * 7) % 28);
+              ctx.strokeStyle = '#0284c7';
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(bx, by, 2.5, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+        } else {
+          // Kim loại chìm ở đáy cốc
+          const metalY = bottomY - 16;
+          drawMetalSampleInVessel(ctx, cx, metalY, benchState.metalSymbol, p, rx, timeSec);
+          if (rx && rx.reacts && rx.bubbles && p < 0.96) {
+            drawRisingBubbles(ctx, cx, metalY - 6, liqTop, timeSec, 8);
+          }
+        }
+      }
+    }
+
+    function drawTestTube(ctx, cx, bottomY, vessel, p, rx, timeSec) {
+      const tw = 56;
+      const th = 195;
+      const topY = bottomY - th;
+      const liqTop = topY + 64;
+
+      let liqColor = vessel.liquidColor;
+      if (rx && rx.reacts && rx.solutionEndColor) {
+        const startC = rx.solutionStartColor || vessel.liquidColor;
+        liqColor = lerpColor(startC, rx.solutionEndColor, p);
+      }
+
+      // Dung dịch trong ống nghiệm
+      ctx.fillStyle = liqColor;
+      ctx.beginPath();
+      ctx.moveTo(cx - tw / 2 + 2, liqTop);
+      ctx.lineTo(cx - tw / 2 + 2, bottomY - tw / 2);
+      ctx.arc(cx, bottomY - tw / 2, tw / 2 - 2, Math.PI, 0, true);
+      ctx.lineTo(cx + tw / 2 - 2, liqTop);
+      ctx.closePath();
+      ctx.fill();
+
+      // Thành ống nghiệm
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(cx - tw / 2 - 3, topY);
+      ctx.lineTo(cx - tw / 2, bottomY - tw / 2);
+      ctx.arc(cx, bottomY - tw / 2, tw / 2, Math.PI, 0, true);
+      ctx.lineTo(cx + tw / 2 + 3, topY);
+      ctx.stroke();
+
+      // Kim loại trong ống nghiệm
+      if (benchState.metalSymbol) {
+        const metalY = bottomY - 22;
+        drawMetalSampleInVessel(ctx, cx, metalY, benchState.metalSymbol, p, rx, timeSec);
+
+        if (rx && rx.reacts && rx.bubbles && p < 0.96) {
+          const count = rx.bubbles === 'fast' ? 14 : rx.bubbles === 'medium' ? 9 : 5;
+          drawRisingBubbles(ctx, cx, metalY - 8, liqTop, timeSec, count);
+        }
+      }
+    }
+
+    function drawMetalSampleInVessel(ctx, x, y, symbol, p, rx, timeSec) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      if (rx && rx.reacts && rx.dissolveMetal) {
+        const sc = Math.max(0.18, 1 - p * 0.82);
+        ctx.scale(sc, sc);
+      }
+
+      let fillColor = METALS_DATA[symbol].colorHex;
+      if (rx && rx.reacts && rx.solidEndColor) {
+        fillColor = lerpColorHex(fillColor, rx.solidEndColor, p);
+      }
+
+      if (symbol === 'Na') {
+        ctx.fillStyle = fillColor;
+        ctx.strokeStyle = '#475569';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(-10, -8, 20, 16, 4);
+        ctx.fill();
+        ctx.stroke();
+      } else if (symbol === 'Mg') {
+        ctx.strokeStyle = fillColor;
+        ctx.lineWidth = 4.5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-14, 6);
+        ctx.bezierCurveTo(-6, -12, 6, 12, 14, -6);
+        ctx.stroke();
+      } else if (symbol === 'Zn') {
+        ctx.fillStyle = fillColor;
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 1.4;
+        [[-7, 3, 6], [5, 4, 5.5], [0, -4, 6]].forEach(([gx, gy, gr]) => {
+          ctx.beginPath();
+          ctx.arc(gx, gy, gr, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        });
+      } else if (symbol === 'Fe') {
+        // Đinh sắt nghiêng trong ống nghiệm/bình
+        ctx.rotate(-0.35);
+        ctx.fillStyle = fillColor;
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 1.4;
+        ctx.fillRect(-16, -3, 28, 6);
+        ctx.strokeRect(-16, -3, 28, 6);
+        ctx.fillRect(-19, -6, 4, 12);
+
+        // Lớp kim loại mới bám từ từ lên bề mặt đinh sắt
+        if (rx && rx.reacts && rx.coatingColor && p > 0.05) {
+          ctx.fillStyle = rx.coatingColor;
+          ctx.globalAlpha = Math.min(0.95, p * 1.15);
+          ctx.fillRect(-10, -3.5, 22 * Math.min(1, p * 1.2), 7);
+          ctx.globalAlpha = 1;
+        }
+      } else if (symbol === 'Cu') {
+        // Cuộn dây đồng xoắn
+        ctx.strokeStyle = fillColor;
+        ctx.lineWidth = 3.5;
+        for (let i = -1; i <= 1; i++) {
+          ctx.beginPath();
+          ctx.ellipse(0, i * 6, 12, 4, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        // Lớp bạc bám từ từ lên dây đồng khi nhúng vào AgNO3
+        if (rx && rx.reacts && rx.coatingColor && p > 0.05) {
+          ctx.strokeStyle = rx.coatingColor;
+          ctx.lineWidth = 4;
+          ctx.globalAlpha = Math.min(0.95, p * 1.15);
+          for (let i = -1; i <= 1; i++) {
+            ctx.beginPath();
+            ctx.ellipse(0, i * 6, 12, 4, 0, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      ctx.restore();
+    }
+
+    function drawRisingBubbles(ctx, cx, startY, topY, timeSec, count) {
+      const span = Math.max(20, startY - topY);
+      for (let i = 0; i < count; i++) {
+        const prog = ((timeSec * 0.65 + i / count) % 1);
+        const by = startY - prog * span;
+        const bx = cx + Math.sin(timeSec * 5 + i * 2.1) * 12;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.strokeStyle = '#0284c7';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(bx, by, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+
+    function lerpColorHex(hex1, hex2, t) {
+      const c1 = parseInt(hex1.slice(1), 16);
+      const c2 = parseInt(hex2.slice(1), 16);
+      const r1 = (c1 >> 16) & 255, g1 = (c1 >> 8) & 255, b1 = c1 & 255;
+      const r2 = (c2 >> 16) & 255, g2 = (c2 >> 8) & 255, b2 = c2 & 255;
+      const r = Math.round(r1 + (r2 - r1) * t);
+      const g = Math.round(g1 + (g2 - g1) * t);
+      const b = Math.round(b1 + (b2 - b1) * t);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    // -------------------------------------------------------------------------
+    // VẼ CẢNH VI MÔ (KHÔNG PHƯƠNG TRÌNH SẴN, KHÔNG VĂN BẢN GIẢI THÍCH SẴN,
+    // NGUYÊN TỬ KIM LOẠI ĐỨNG ĐỘC LẬP BAN ĐẦU, NÉT ĐỨT LIÊN KẾT ĐÚNG CTHH SẢN PHẨM)
+    // -------------------------------------------------------------------------
+    function drawAtom(ctx, x, y, r, label, fill, textColor = '#ffffff') {
+      ctx.fillStyle = fill;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = textColor;
+      ctx.font = `700 ${r >= 16 ? 11 : 9.5}px "JetBrains Mono", monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, x, y);
+    }
+
+    function drawDashedBond(ctx, x1, y1, x2, y2, color = '#38bdf8', alpha = 1) {
+      if (alpha <= 0.02) return;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.4;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function drawMicroScene(timeSec) {
+      if (!microCtx || !microCanvas) return;
+      const w = microCanvas.width / window.devicePixelRatio;
+      const h = microCanvas.height / window.devicePixelRatio;
+      microCtx.clearRect(0, 0, w, h);
+
+      if (!benchState.vesselId || !benchState.metalSymbol) {
+        microCtx.fillStyle = '#94a3b8';
+        microCtx.font = '500 12px "Be Vietnam Pro", sans-serif';
+        microCtx.textAlign = 'center';
+        microCtx.fillText('Chọn hóa chất vào bình để quan sát cấu trúc hạt vi mô', w / 2, h / 2);
+        return;
+      }
+
+      const rx = benchState.reactionData;
+      const p = benchState.isRunning ? benchState.progress / 100 : 0;
+      const breakAlpha = rx && rx.reacts ? Math.max(0, 1 - p * 2.2) : 1;
+      const formAlpha = rx && rx.reacts ? Math.max(0, Math.min(1, (p - 0.35) * 1.6)) : 0;
+      const moveT = rx && rx.reacts ? Math.min(1, Math.max(0, (p - 0.15) / 0.75)) : 0;
+      const vib = Math.sin(timeSec * 3.5) * 2.5;
+
+      const key = rx ? rx.microKey : 'none';
+
+      // 1. Mg + O2 -> MgO (2Mg + O2 -> 2MgO: mỗi Mg liên kết nét đứt với 1 O)
+      if (key === 'mg_o2') {
+        const mg1 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.32, h * 0.34, moveT) + vib];
+        const mg2 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.68, h * 0.66, moveT) - vib];
+        const o1 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.43, h * 0.34, moveT) - vib];
+        const o2 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.57, h * 0.66, moveT) + vib];
+
+        // Liên kết O---O ban đầu đứt gãy; liên kết Mg---O hình thành
+        drawDashedBond(microCtx, o1[0], o1[1], o2[0], o2[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, mg1[0], mg1[1], o1[0], o1[1], '#34d399', formAlpha);
+        drawDashedBond(microCtx, mg2[0], mg2[1], o2[0], o2[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, mg1[0], mg1[1], 17, 'Mg', '#64748b');
+        drawAtom(microCtx, mg2[0], mg2[1], 17, 'Mg', '#64748b');
+        drawAtom(microCtx, o1[0], o1[1], 15, 'O', '#ef4444');
+        drawAtom(microCtx, o2[0], o2[1], 15, 'O', '#ef4444');
+        return;
+      }
+
+      // 2. Fe + O2 -> Fe3O4 (3Fe + 2O2 -> Fe3O4: 3 nguyên tử Fe liên kết nét đứt với 4 nguyên tử O)
+      if (key === 'fe_o2') {
+        // 3 nguyên tử Fe đứng độc lập ban đầu -> tiến vào trung tâm tạo cụm Fe3O4
+        const fe1 = [lerp(w * 0.20, w * 0.42, moveT), lerp(h * 0.26, h * 0.36, moveT) + vib];
+        const fe2 = [lerp(w * 0.20, w * 0.58, moveT), lerp(h * 0.50, h * 0.50, moveT) - vib];
+        const fe3 = [lerp(w * 0.20, w * 0.42, moveT), lerp(h * 0.74, h * 0.64, moveT) + vib];
+
+        // 2 phân tử O2 (4 nguyên tử O)
+        const o1 = [lerp(w * 0.76, w * 0.42, moveT), lerp(h * 0.24, h * 0.20, moveT)];
+        const o2 = [lerp(w * 0.76, w * 0.58, moveT), lerp(h * 0.38, h * 0.32, moveT)];
+        const o3 = [lerp(w * 0.76, w * 0.58, moveT), lerp(h * 0.62, h * 0.68, moveT)];
+        const o4 = [lerp(w * 0.76, w * 0.42, moveT), lerp(h * 0.76, h * 0.80, moveT)];
+
+        // Liên kết O---O ban đầu
+        drawDashedBond(microCtx, o1[0], o1[1], o2[0], o2[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, o3[0], o3[1], o4[0], o4[1], '#f87171', breakAlpha);
+
+        // Liên kết nét đứt Fe---O trong Fe3O4 (3 Fe nối với 4 O)
+        drawDashedBond(microCtx, fe1[0], fe1[1], o1[0], o1[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, fe1[0], fe1[1], o2[0], o2[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, fe2[0], fe2[1], o2[0], o2[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, fe2[0], fe2[1], o3[0], o3[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, fe3[0], fe3[1], o3[0], o3[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, fe3[0], fe3[1], o4[0], o4[1], '#fbbf24', formAlpha);
+
+        [fe1, fe2, fe3].forEach(pt => drawAtom(microCtx, pt[0], pt[1], 16, 'Fe', '#475569'));
+        [o1, o2, o3, o4].forEach(pt => drawAtom(microCtx, pt[0], pt[1], 13, 'O', '#ef4444'));
+        return;
+      }
+
+      // 3. Cu + O2 -> CuO (2Cu + O2 -> 2CuO)
+      if (key === 'cu_o2') {
+        const cu1 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.32, h * 0.34, moveT) + vib];
+        const cu2 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.68, h * 0.66, moveT) - vib];
+        const o1 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.43, h * 0.34, moveT)];
+        const o2 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.57, h * 0.66, moveT)];
+
+        drawDashedBond(microCtx, o1[0], o1[1], o2[0], o2[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, cu1[0], cu1[1], o1[0], o1[1], '#34d399', formAlpha);
+        drawDashedBond(microCtx, cu2[0], cu2[1], o2[0], o2[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, cu1[0], cu1[1], 17, 'Cu', '#ea580c');
+        drawAtom(microCtx, cu2[0], cu2[1], 17, 'Cu', '#ea580c');
+        drawAtom(microCtx, o1[0], o1[1], 15, 'O', '#ef4444');
+        drawAtom(microCtx, o2[0], o2[1], 15, 'O', '#ef4444');
+        return;
+      }
+
+      // 4. Na + Cl2 -> NaCl (2Na + Cl2 -> 2NaCl: mỗi Na liên kết nét đứt với 1 Cl)
+      if (key === 'na_cl2') {
+        const na1 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.32, h * 0.34, moveT) + vib];
+        const na2 = [lerp(w * 0.24, w * 0.38, moveT), lerp(h * 0.68, h * 0.66, moveT) - vib];
+        const cl1 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.42, h * 0.34, moveT)];
+        const cl2 = [lerp(w * 0.72, w * 0.58, moveT), lerp(h * 0.58, h * 0.66, moveT)];
+
+        drawDashedBond(microCtx, cl1[0], cl1[1], cl2[0], cl2[1], '#a3e635', breakAlpha);
+        drawDashedBond(microCtx, na1[0], na1[1], cl1[0], cl1[1], '#38bdf8', formAlpha);
+        drawDashedBond(microCtx, na2[0], na2[1], cl2[0], cl2[1], '#38bdf8', formAlpha);
+
+        drawAtom(microCtx, na1[0], na1[1], 17, 'Na', '#6366f1');
+        drawAtom(microCtx, na2[0], na2[1], 17, 'Na', '#6366f1');
+        drawAtom(microCtx, cl1[0], cl1[1], 16, 'Cl', '#16a34a');
+        drawAtom(microCtx, cl2[0], cl2[1], 16, 'Cl', '#16a34a');
+        return;
+      }
+
+      // 5. Fe + Cl2 -> FeCl3 (1 Fe liên kết nét đứt với 3 Cl)
+      if (key === 'fe_cl2') {
+        const fe = [lerp(w * 0.24, w * 0.48, moveT), h * 0.50 + vib];
+        const cl1 = [lerp(w * 0.72, w * 0.48, moveT), lerp(h * 0.24, h * 0.22, moveT)];
+        const cl2 = [lerp(w * 0.72, w * 0.32, moveT), lerp(h * 0.50, h * 0.68, moveT)];
+        const cl3 = [lerp(w * 0.72, w * 0.64, moveT), lerp(h * 0.76, h * 0.68, moveT)];
+
+        drawDashedBond(microCtx, fe[0], fe[1], cl1[0], cl1[1], '#fb923c', formAlpha);
+        drawDashedBond(microCtx, fe[0], fe[1], cl2[0], cl2[1], '#fb923c', formAlpha);
+        drawDashedBond(microCtx, fe[0], fe[1], cl3[0], cl3[1], '#fb923c', formAlpha);
+
+        drawAtom(microCtx, fe[0], fe[1], 18, 'Fe', '#475569');
+        drawAtom(microCtx, cl1[0], cl1[1], 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, cl2[0], cl2[1], 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, cl3[0], cl3[1], 15, 'Cl', '#16a34a');
+        return;
+      }
+
+      // 6. Cu + Cl2 -> CuCl2 (1 Cu liên kết nét đứt với 2 Cl)
+      if (key === 'cu_cl2') {
+        const cu = [lerp(w * 0.24, w * 0.48, moveT), h * 0.50 + vib];
+        const cl1 = [lerp(w * 0.72, w * 0.32, moveT), lerp(h * 0.40, h * 0.50, moveT)];
+        const cl2 = [lerp(w * 0.72, w * 0.64, moveT), lerp(h * 0.60, h * 0.50, moveT)];
+
+        drawDashedBond(microCtx, cl1[0], cl1[1], cl2[0], cl2[1], '#a3e635', breakAlpha);
+        drawDashedBond(microCtx, cu[0], cu[1], cl1[0], cl1[1], '#38bdf8', formAlpha);
+        drawDashedBond(microCtx, cu[0], cu[1], cl2[0], cl2[1], '#38bdf8', formAlpha);
+
+        drawAtom(microCtx, cu[0], cu[1], 18, 'Cu', '#ea580c');
+        drawAtom(microCtx, cl1[0], cl1[1], 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, cl2[0], cl2[1], 15, 'Cl', '#16a34a');
+        return;
+      }
+
+      // 7. Na + H2O -> NaOH + H2 (2Na + 2H2O -> 2NaOH + H2: mỗi Na liên kết nét đứt với đúng 1 OH; 2 H tạo H---H)
+      if (key === 'na_h2o') {
+        const na1 = [lerp(w * 0.18, w * 0.28, moveT), lerp(h * 0.30, h * 0.28, moveT) + vib];
+        const na2 = [lerp(w * 0.18, w * 0.28, moveT), lerp(h * 0.70, h * 0.72, moveT) - vib];
+
+        // 2 phân tử H2O: (O1 - H1a, H1b) và (O2 - H2a, H2b)
+        const o1 = [lerp(w * 0.62, w * 0.46, moveT), lerp(h * 0.30, h * 0.28, moveT)];
+        const h1a = [lerp(w * 0.76, w * 0.60, moveT), lerp(h * 0.22, h * 0.28, moveT)];
+        const h1b = [lerp(w * 0.62, w * 0.78, moveT), lerp(h * 0.42, h * 0.42, moveT) - moveT * 10];
+
+        const o2 = [lerp(w * 0.62, w * 0.46, moveT), lerp(h * 0.70, h * 0.72, moveT)];
+        const h2a = [lerp(w * 0.76, w * 0.60, moveT), lerp(h * 0.78, h * 0.72, moveT)];
+        const h2b = [lerp(w * 0.62, w * 0.78, moveT), lerp(h * 0.58, h * 0.58, moveT) - moveT * 10];
+
+        // Liên kết O---H giữ lại trong OH
+        drawDashedBond(microCtx, o1[0], o1[1], h1a[0], h1a[1], '#38bdf8', 1);
+        drawDashedBond(microCtx, o2[0], o2[1], h2a[0], h2a[1], '#38bdf8', 1);
+
+        // Liên kết O---H bị phá vỡ
+        drawDashedBond(microCtx, o1[0], o1[1], h1b[0], h1b[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, o2[0], o2[1], h2b[0], h2b[1], '#f87171', breakAlpha);
+
+        // Liên kết mới: mỗi Na liên kết nét đứt với 1 nhóm OH (Na---O---H) và H---H (H2)
+        drawDashedBond(microCtx, na1[0], na1[1], o1[0], o1[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, na2[0], na2[1], o2[0], o2[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, h1b[0], h1b[1], h2b[0], h2b[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, na1[0], na1[1], 16, 'Na', '#6366f1');
+        drawAtom(microCtx, na2[0], na2[1], 16, 'Na', '#6366f1');
+        drawAtom(microCtx, o1[0], o1[1], 14, 'O', '#ef4444');
+        drawAtom(microCtx, o2[0], o2[1], 14, 'O', '#ef4444');
+        [h1a, h1b, h2a, h2b].forEach(pt => drawAtom(microCtx, pt[0], pt[1], 11, 'H', '#0ea5e9'));
+        return;
+      }
+
+      // 8. Mg + H2O -> Mg(OH)2 + H2 (1 Mg liên kết nét đứt với 2 nhóm OH)
+      if (key === 'mg_h2o') {
+        const mg = [lerp(w * 0.20, w * 0.42, moveT), h * 0.50 + vib];
+        const o1 = [lerp(w * 0.62, w * 0.42, moveT), lerp(h * 0.30, h * 0.26, moveT)];
+        const h1a = [lerp(w * 0.76, w * 0.56, moveT), lerp(h * 0.22, h * 0.26, moveT)];
+        const h1b = [lerp(w * 0.62, w * 0.78, moveT), lerp(h * 0.42, h * 0.42, moveT)];
+
+        const o2 = [lerp(w * 0.62, w * 0.42, moveT), lerp(h * 0.70, h * 0.74, moveT)];
+        const h2a = [lerp(w * 0.76, w * 0.56, moveT), lerp(h * 0.78, h * 0.74, moveT)];
+        const h2b = [lerp(w * 0.62, w * 0.78, moveT), lerp(h * 0.58, h * 0.58, moveT)];
+
+        drawDashedBond(microCtx, o1[0], o1[1], h1a[0], h1a[1], '#38bdf8', 1);
+        drawDashedBond(microCtx, o2[0], o2[1], h2a[0], h2a[1], '#38bdf8', 1);
+        drawDashedBond(microCtx, o1[0], o1[1], h1b[0], h1b[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, o2[0], o2[1], h2b[0], h2b[1], '#f87171', breakAlpha);
+
+        drawDashedBond(microCtx, mg[0], mg[1], o1[0], o1[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, mg[0], mg[1], o2[0], o2[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, h1b[0], h1b[1], h2b[0], h2b[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, mg[0], mg[1], 17, 'Mg', '#64748b');
+        drawAtom(microCtx, o1[0], o1[1], 14, 'O', '#ef4444');
+        drawAtom(microCtx, o2[0], o2[1], 14, 'O', '#ef4444');
+        [h1a, h1b, h2a, h2b].forEach(pt => drawAtom(microCtx, pt[0], pt[1], 11, 'H', '#0ea5e9'));
+        return;
+      }
+
+      // 9. Mg/Zn/Fe + HCl -> MCl2 + H2 (1 kim loại liên kết nét đứt với 2 Cl; 2 H tạo H---H)
+      if (key === 'mg_hcl' || key === 'zn_hcl' || key === 'fe_hcl') {
+        const sym = key === 'mg_hcl' ? 'Mg' : key === 'zn_hcl' ? 'Zn' : 'Fe';
+        const col = sym === 'Mg' ? '#64748b' : sym === 'Zn' ? '#475569' : '#334155';
+
+        const mPos = [lerp(w * 0.22, w * 0.42, moveT), h * 0.50 + vib];
+        const cl1 = [lerp(w * 0.62, w * 0.42, moveT), lerp(h * 0.32, h * 0.26, moveT)];
+        const h1 = [lerp(w * 0.76, w * 0.76, moveT), lerp(h * 0.32, h * 0.42, moveT)];
+        const cl2 = [lerp(w * 0.62, w * 0.42, moveT), lerp(h * 0.68, h * 0.74, moveT)];
+        const h2 = [lerp(w * 0.76, w * 0.76, moveT), lerp(h * 0.68, h * 0.58, moveT)];
+
+        drawDashedBond(microCtx, cl1[0], cl1[1], h1[0], h1[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, cl2[0], cl2[1], h2[0], h2[1], '#f87171', breakAlpha);
+
+        drawDashedBond(microCtx, mPos[0], mPos[1], cl1[0], cl1[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, mPos[0], mPos[1], cl2[0], cl2[1], '#fbbf24', formAlpha);
+        drawDashedBond(microCtx, h1[0], h1[1], h2[0], h2[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, mPos[0], mPos[1], 17, sym, col);
+        drawAtom(microCtx, cl1[0], cl1[1], 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, cl2[0], cl2[1], 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, h1[0], h1[1], 12, 'H', '#0ea5e9');
+        drawAtom(microCtx, h2[0], h2[1], 12, 'H', '#0ea5e9');
+        return;
+      }
+
+      // 10. Phản ứng thế muối: Fe + CuSO4, Zn + CuSO4, Zn + FeSO4
+      if (key === 'fe_cuso4' || key === 'zn_cuso4' || key === 'zn_feso4') {
+        const m1Sym = key.startsWith('fe') ? 'Fe' : 'Zn';
+        const m2Sym = key.endsWith('cuso4') ? 'Cu' : 'Fe';
+        const m1Col = m1Sym === 'Fe' ? '#475569' : '#64748b';
+        const m2Col = m2Sym === 'Cu' ? '#ea580c' : '#475569';
+
+        const m1 = [lerp(w * 0.24, w * 0.42, moveT), h * 0.50 + vib];
+        const so4 = [w * 0.62, h * 0.50];
+        const m2 = [lerp(w * 0.80, w * 0.24, moveT), lerp(h * 0.50, h * 0.72, moveT)];
+
+        drawDashedBond(microCtx, m2[0], m2[1], so4[0], so4[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, m1[0], m1[1], so4[0], so4[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, m1[0], m1[1], 17, m1Sym, m1Col);
+        drawAtom(microCtx, so4[0], so4[1], 19, 'SO₄', '#0284c7');
+        drawAtom(microCtx, m2[0], m2[1], 17, m2Sym, m2Col);
+        return;
+      }
+
+      // 11. Cu + 2AgNO3 -> Cu(NO3)2 + 2Ag (1 Cu liên kết nét đứt với 2 nhóm NO3; giải phóng 2 Ag tự do)
+      if (key === 'cu_agno3') {
+        const cu = [lerp(w * 0.22, w * 0.44, moveT), h * 0.50 + vib];
+        const no3a = [w * 0.62, h * 0.32];
+        const no3b = [w * 0.62, h * 0.68];
+        const ag1 = [lerp(w * 0.80, w * 0.22, moveT), lerp(h * 0.32, h * 0.26, moveT)];
+        const ag2 = [lerp(w * 0.80, w * 0.22, moveT), lerp(h * 0.68, h * 0.74, moveT)];
+
+        drawDashedBond(microCtx, ag1[0], ag1[1], no3a[0], no3a[1], '#f87171', breakAlpha);
+        drawDashedBond(microCtx, ag2[0], ag2[1], no3b[0], no3b[1], '#f87171', breakAlpha);
+
+        drawDashedBond(microCtx, cu[0], cu[1], no3a[0], no3a[1], '#34d399', formAlpha);
+        drawDashedBond(microCtx, cu[0], cu[1], no3b[0], no3b[1], '#34d399', formAlpha);
+
+        drawAtom(microCtx, cu[0], cu[1], 17, 'Cu', '#ea580c');
+        drawAtom(microCtx, no3a[0], no3a[1], 17, 'NO₃', '#0284c7');
+        drawAtom(microCtx, no3b[0], no3b[1], 17, 'NO₃', '#0284c7');
+        drawAtom(microCtx, ag1[0], ag1[1], 15, 'Ag', '#94a3b8', '#0f172a');
+        drawAtom(microCtx, ag2[0], ag2[1], 15, 'Ag', '#94a3b8', '#0f172a');
+        return;
+      }
+
+      // 12. Trường hợp không phản ứng: các hạt giữ nguyên liên kết ban đầu
+      const sym = benchState.metalSymbol;
+      drawAtom(microCtx, w * 0.28, h * 0.50 + vib, 18, sym, METALS_DATA[sym].colorHex, '#0f172a');
+      if (benchState.vesselId === 'tube_hcl') {
+        drawDashedBond(microCtx, w * 0.60, h * 0.42, w * 0.76, h * 0.42, '#38bdf8', 1);
+        drawAtom(microCtx, w * 0.60, h * 0.42, 15, 'Cl', '#16a34a');
+        drawAtom(microCtx, w * 0.76, h * 0.42, 12, 'H', '#0ea5e9');
+      } else if (benchState.vesselId === 'beaker_h2o') {
+        drawDashedBond(microCtx, w * 0.64, h * 0.50, w * 0.54, h * 0.36, '#38bdf8', 1);
+        drawDashedBond(microCtx, w * 0.64, h * 0.50, w * 0.74, h * 0.36, '#38bdf8', 1);
+        drawAtom(microCtx, w * 0.64, h * 0.50, 15, 'O', '#ef4444');
+        drawAtom(microCtx, w * 0.54, h * 0.36, 11, 'H', '#0ea5e9');
+        drawAtom(microCtx, w * 0.74, h * 0.36, 11, 'H', '#0ea5e9');
+      } else {
+        drawDashedBond(microCtx, w * 0.58, h * 0.50, w * 0.76, h * 0.50, '#38bdf8', 1);
+        drawAtom(microCtx, w * 0.58, h * 0.50, 17, 'M', '#64748b');
+        drawAtom(microCtx, w * 0.76, h * 0.50, 18, 'Gốc', '#0284c7');
+      }
+    }
+
+    // =========================================================================
+    // 9. NHIỆM VỤ 3: ĐỐI CHIẾU, GIẢI THÍCH & NỘP BÀI QUA GMAIL HỌC SINH / PDF
+    // =========================================================================
+    function renderNV3() {
+      const container = document.getElementById('nv3-cards-container');
+      container.innerHTML = '';
+
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const pred = appState.predictions[exp.id] || { willReact: '', phenomenon: '' };
+        const obs = appState.observations[exp.id] || { external: '', microChange: '' };
+        const expl = appState.explanations[exp.id] || { scientific: '' };
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4';
+        card.innerHTML = `
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-2.5">
+            <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center">${idx + 1}</span>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900">${exp.title}</h3>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-3.5">
+            <!-- CỘT 1: DỰ ĐOÁN BAN ĐẦU -->
+            <div class="rounded-xl bg-amber-50/70 border border-amber-200/80 p-3.5 space-y-2">
+              <div class="text-xs font-extrabold text-amber-900 flex items-center gap-1.5">
+                <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+                <span>Dự đoán ban đầu (Nhiệm vụ 1)</span>
+              </div>
+              <div class="text-xs text-slate-700">
+                <span class="font-bold text-slate-800">Khả năng phản ứng:</span>
+                <p class="mt-0.5 whitespace-pre-line bg-white/80 p-2 rounded-lg border border-amber-100">${escapeHtml(pred.willReact)}</p>
+              </div>
+              <div class="text-xs text-slate-700">
+                <span class="font-bold text-slate-800">Hiện tượng dự đoán:</span>
+                <p class="mt-0.5 whitespace-pre-line bg-white/80 p-2 rounded-lg border border-amber-100">${escapeHtml(pred.phenomenon)}</p>
+              </div>
+            </div>
+
+            <!-- CỘT 2: KẾT QUẢ QUAN SÁT THỰC NGHIỆM -->
+            <div class="rounded-xl bg-sky-50/70 border border-sky-200/80 p-3.5 space-y-2">
+              <div class="text-xs font-extrabold text-sky-900 flex items-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                <span>Kết quả quan sát (Nhiệm vụ 2)</span>
+              </div>
+              <div class="text-xs text-slate-700">
+                <span class="font-bold text-slate-800">Hiện tượng bên ngoài:</span>
+                <p class="mt-0.5 whitespace-pre-line bg-white/80 p-2 rounded-lg border border-sky-100">${escapeHtml(obs.external)}</p>
+              </div>
+              <div class="text-xs text-slate-700">
+                <span class="font-bold text-slate-800">Biến đổi vi mô & liên kết:</span>
+                <p class="mt-0.5 whitespace-pre-line bg-white/80 p-2 rounded-lg border border-sky-100">${escapeHtml(obs.microChange)}</p>
+              </div>
+            </div>
+
+            <!-- CỘT 3: GIẢI THÍCH HIỆN TƯỢNG -->
+            <div class="rounded-xl bg-emerald-50/60 border border-emerald-200 p-3.5 flex flex-col">
+              <label class="block text-xs font-extrabold text-emerald-900 mb-1.5">
+                Vì sao nhóm nhận biết được phản ứng có xảy ra hay không? (Kèm PTHH minh họa) <span class="text-rose-500">*</span>
+              </label>
+              <textarea rows="6" oninput="updateNV3Field('${exp.id}', this.value)"
+                placeholder="Dựa vào dấu hiệu quan sát bên ngoài, sự thay đổi liên kết vi mô và mức độ hoạt động hóa học của kim loại để giải thích và viết PTHH..."
+                class="w-full flex-1 px-3 py-2 rounded-xl border border-emerald-300 bg-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">${escapeHtml(expl.scientific)}</textarea>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById('teacher-email-input').value = appState.submissionTarget.email || '';
+      document.getElementById('teacher-gas-input').value = appState.submissionTarget.gasUrl || '';
+      lucide.createIcons();
+    }
+
+    function updateNV3Field(expId, value) {
+      appState.explanations[expId].scientific = value;
+      saveState();
+    }
+
+    function saveSubmissionTarget() {
+      appState.submissionTarget.email = document.getElementById('teacher-email-input').value.trim();
+      appState.submissionTarget.gasUrl = document.getElementById('teacher-gas-input').value.trim();
+      saveState();
+    }
+
+    function buildPlainReport() {
+      const members = appState.groupInfo.members.filter(m => m && m.trim()).join(', ');
+      let lines = [
+        'PHIẾU HỌC TẬP SỐ – KHTN 9 – BÀI 18: TÍNH CHẤT CHUNG CỦA KIM LOẠI',
+        '==================================================================',
+        `1. Tên nhóm: ${appState.groupInfo.groupName}`,
+        `2. Ngày thực hiện: ${appState.groupInfo.execDate}`,
+        `3. Thành viên: ${members}`,
+        '',
+        '--- NHẬT KÝ CÁC PHÉP THỬ ĐÃ THỰC HIỆN ---',
+        appState.trialsLog.length > 0
+          ? appState.trialsLog.map((t, i) => `${i + 1}. [${t.groupTitle}] ${t.label} (${t.time})`).join('\n')
+          : '(Chưa ghi nhận phép thử)',
+        ''
+      ];
+
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const p = appState.predictions[exp.id];
+        const o = appState.observations[exp.id];
+        const e = appState.explanations[exp.id];
+        lines.push(`==================================================================`);
+        lines.push(`THÍ NGHIỆM ${idx + 1}: ${exp.title}`);
+        lines.push(`[NV1 - Dự đoán] Có PƯ không: ${p.willReact}`);
+        lines.push(`[NV1 - Dự đoán] Hiện tượng: ${p.phenomenon}`);
+        lines.push(`[NV2 - Quan sát] Hiện tượng bên ngoài: ${o.external}`);
+        lines.push(`[NV2 - Quan sát] Biến đổi hạt vi mô & liên kết: ${o.microChange}`);
+        lines.push(`[NV3 - Giải thích] Vì sao nhận biết có/không xảy ra PƯ: ${e.scientific}`);
+        lines.push('');
+      });
+
+      return lines.join('\n');
+    }
+
+    function populatePrintTemplate() {
+      document.getElementById('print-group-name').textContent = appState.groupInfo.groupName;
+      document.getElementById('print-exec-date').textContent = appState.groupInfo.execDate;
+      document.getElementById('print-members').textContent = appState.groupInfo.members.filter(m => m && m.trim()).join(', ');
+
+      let html = `
+        <div class="print-section">
+          <div class="text-xs font-bold mb-1">Các thao tác & phép thử đã thực hiện:</div>
+          <div class="text-xs">${appState.trialsLog.map(t => `${escapeHtml(t.groupTitle)}: ${escapeHtml(t.label)}`).join(' • ') || 'Không có'}</div>
+        </div>
+        <table>
+          <thead>
+            <tr class="bg-slate-100 text-xs">
+              <th style="width:18%">Thí nghiệm</th>
+              <th style="width:24%">Nhiệm vụ 1: Dự đoán</th>
+              <th style="width:28%">Nhiệm vụ 2: Quan sát thực nghiệm</th>
+              <th style="width:30%">Nhiệm vụ 3: Giải thích</th>
+            </tr>
+          </thead>
+          <tbody class="text-xs">
+      `;
+
+      EXPERIMENT_GROUPS.forEach((exp, idx) => {
+        const p = appState.predictions[exp.id];
+        const o = appState.observations[exp.id];
+        const e = appState.explanations[exp.id];
+        html += `
+          <tr class="print-section">
+            <td><strong>TN ${idx + 1}:</strong> ${escapeHtml(exp.shortTitle)}</td>
+            <td>
+              <div><strong>Khả năng PƯ:</strong> ${escapeHtml(p.willReact)}</div>
+              <div class="mt-1"><strong>Hiện tượng:</strong> ${escapeHtml(p.phenomenon)}</div>
+            </td>
+            <td>
+              <div><strong>Hiện tượng ngoài:</strong> ${escapeHtml(o.external)}</div>
+              <div class="mt-1"><strong>Biến đổi vi mô:</strong> ${escapeHtml(o.microChange)}</div>
+            </td>
+            <td>${escapeHtml(e.scientific)}</td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      document.getElementById('print-table-container').innerHTML = html;
+    }
+
+    function exportToPDF() {
+      populatePrintTemplate();
+      window.print();
+    }
+
+    function copyReportToClipboard() {
+      const text = buildPlainReport();
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Đã sao chép toàn bộ nội dung Phiếu học tập vào bộ nhớ tạm!', 'success');
+    }
+
+    async function submitWorksheet() {
+      const teacherEmail = appState.submissionTarget.email;
+      const gasUrl = appState.submissionTarget.gasUrl;
+      const feedbackBox = document.getElementById('submission-feedback-box');
+
+      if (!teacherEmail) {
+        feedbackBox.className = 'rounded-xl p-4 border border-amber-300 bg-amber-50 text-amber-900 text-xs sm:text-sm';
+        feedbackBox.innerHTML = `<strong>Chưa nhập Gmail Giáo viên:</strong> Vui lòng nhập địa chỉ Gmail của Giáo viên nhận bài vào ô bên trên rồi nhấn lại nút <strong>NỘP PHIẾU HỌC TẬP</strong> (hoặc nhấn <strong>Xuất Phiếu học tập (PDF)</strong> để lưu bài).`;
+        feedbackBox.classList.remove('hidden');
+        document.getElementById('teacher-email-input').focus();
+        return;
+      }
+
+      populatePrintTemplate();
+      const plainTextReport = buildPlainReport();
+      const htmlReport = document.getElementById('printable-worksheet').innerHTML;
+      const subject = `[KHTN 9 - Bài 18] Phiếu học tập - ${appState.groupInfo.groupName} (${appState.groupInfo.execDate})`;
+      const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(teacherEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(plainTextReport)}`;
+
+      const payload = {
+        teacherEmail,
+        groupName: appState.groupInfo.groupName,
+        execDate: appState.groupInfo.execDate,
+        plainTextReport,
+        htmlReport
+      };
+
+      if (gasUrl) {
+        const btn = document.getElementById('btn-submit-final');
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>Đang gửi dữ liệu thực tế...</span>`;
+        lucide.createIcons();
+
+        try {
+          const res = await fetch(gasUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          if (data && data.status === 'success') {
+            feedbackBox.className = 'rounded-xl p-4 border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs sm:text-sm';
+            feedbackBox.innerHTML = `<strong>✓ Đã gửi thành công Phiếu học tập đến Gmail Giáo viên (${escapeHtml(teacherEmail)})!</strong>`;
+            feedbackBox.classList.remove('hidden');
+            showToast('Nộp Phiếu học tập thành công!', 'success');
+          } else {
+            throw new Error(data.message || 'Không nhận được xác nhận từ máy chủ.');
+          }
+        } catch (err) {
+          feedbackBox.className = 'rounded-xl p-4 border border-rose-300 bg-rose-50 text-rose-900 text-xs sm:text-sm space-y-2';
+          feedbackBox.innerHTML = `
+            <div><strong>Gửi tự động thất bại (${escapeHtml(err.message)}).</strong> Nhấn nút bên dưới để nộp trực tiếp bằng tài khoản Gmail của học sinh:</div>
+            <div class="flex flex-wrap gap-2">
+              <a href="${gmailComposeUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs">Mở Gmail Web & Gửi tới ${escapeHtml(teacherEmail)}</a>
+              <button type="button" onclick="copyReportToClipboard()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold text-xs">Sao chép nội dung bài</button>
+            </div>
+          `;
+          feedbackBox.classList.remove('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i> <span>NỘP PHIẾU HỌC TẬP</span>`;
+          lucide.createIcons();
+        }
+      } else {
+        feedbackBox.className = 'rounded-xl p-4 border border-lab-300 bg-lab-50 text-lab-900 text-xs sm:text-sm space-y-2.5';
+        feedbackBox.innerHTML = `
+          <div><strong>Đã tổng hợp đầy đủ Phiếu học tập của ${escapeHtml(appState.groupInfo.groupName)}!</strong></div>
+          <p class="text-xs text-slate-600">Nhấn nút bên dưới để mở trực tiếp cửa sổ soạn thư <strong>Gmail</strong> bằng tài khoản Gmail của học sinh với nội dung bài làm đã điền sẵn:</p>
+          <div class="flex flex-wrap gap-2">
+            <a href="${gmailComposeUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-lab-600 hover:bg-lab-700 text-white font-bold text-xs shadow-xs">
+              Mở Gmail của học sinh & Gửi tới ${escapeHtml(teacherEmail)}
+            </a>
+            <button type="button" onclick="copyReportToClipboard()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs">
+              Sao chép nội dung phiếu
+            </button>
+            <button type="button" onclick="exportToPDF()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs">
+              Xuất PDF đính kèm
+            </button>
+          </div>
+        `;
+        feedbackBox.classList.remove('hidden');
+        window.open(gmailComposeUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // =========================================================================
+    // 10. KHỞI TẠO ỨNG DỤNG & KHÔI PHỤC ĐÚNG THAO TÁC DANG DỞ
+    // =========================================================================
+    window.addEventListener('beforeunload', () => {
+      saveState();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initStep0();
+      initCanvases();
+      lucide.createIcons();
+
+      const resumeStep = Math.min(appState.currentStep || 0, appState.unlockedStep || 0);
+      navigateToStep(resumeStep);
+
+      if (resumeStep > 0 && appState.groupInfo.groupName) {
+        showToast(`Đã khôi phục tiến trình làm việc của ${appState.groupInfo.groupName} tại Bước ${resumeStep}.`, 'info');
+      }
+
+      animFrameId = requestAnimationFrame(animationLoop);
+    });
+  </script>
+</body>
+</html>
